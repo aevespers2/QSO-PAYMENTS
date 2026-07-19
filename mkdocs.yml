@@ -1,0 +1,40 @@
+site_name: QSO-PAYMENTS
+site_description: Audit-first payment intent, authorization, allocation, evidence, and disabled adapter boundaries for the QSO ecosystem.
+site_url: https://aevespers2.github.io/QSO-PAYMENTS/
+repo_url: https://github.com/aevespers2/QSO-PAYMENTS
+repo_name: aevespers2/QSO-PAYMENTS
+copyright: Documentation-only charter candidate. No custody, signing, settlement, investment product, or promise of returns.
+
+theme:
+  name: mkdocs
+  navigation_depth: 3
+  highlightjs: true
+
+nav:
+  - Overview: index.md
+  - Project guide: PROJECT_GUIDE.md
+  - Architecture: ARCHITECTURE.md
+  - Design contracts: DESIGN_CONTRACTS.md
+  - Developer onboarding: ONBOARDING.md
+  - Security and privacy: SECURITY_PRIVACY.md
+  - Operations and recovery: OPERATIONS.md
+  - Decisions:
+      - Documentation-only boundary: decisions/0001-documentation-only-boundary.md
+  - Repository controls:
+      - Task chain: https://github.com/aevespers2/QSO-PAYMENTS/blob/main/taskchain.md
+      - Release plan: https://github.com/aevespers2/QSO-PAYMENTS/blob/main/release.md
+      - Changelog: https://github.com/aevespers2/QSO-PAYMENTS/blob/main/changelog.md
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - fenced_code
+  - tables
+  - toc:
+      permalink: true
+
+strict: true
