@@ -92,6 +92,8 @@ QSO-PAYMENTS documentation and future contracts must account for:
 6. Add positive and negative fixtures before proposing executable schemas.
 7. Record exact publication commands, workflow versions, link/accessibility/security results, artifact hashes, and rollback evidence.
 
+See [Developer onboarding](ONBOARDING.md) for the local build and pull-request workflow.
+
 ## Documentation release gates
 
 The first documentation candidate is not ready until:
@@ -105,9 +107,14 @@ The first documentation candidate is not ready until:
 
 ## Documentation map
 
-- [Public project page](index.html)
+- [Public project page](index.md)
 - [Architecture and trust boundaries](ARCHITECTURE.md)
-- [Task chain](../taskchain.md)
-- [Release plan](../release.md)
-- [Changelog](../changelog.md)
-- [Repository overview](../README.md)
+- [Design contracts](DESIGN_CONTRACTS.md)
+- [Developer onboarding](ONBOARDING.md)
+- [Security and privacy](SECURITY_PRIVACY.md)
+- [Operations and recovery](OPERATIONS.md)
+- [Documentation-only decision](decisions/0001-documentation-only-boundary.md)
+- [Task chain](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/taskchain.md)
+- [Release plan](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/release.md)
+- [Changelog](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/changelog.md)
+- [Repository overview](https://github.com/aevespers2/QSO-PAYMENTS#readme)
