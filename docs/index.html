@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="QSO-PAYMENTS: auditable payment intent and multi-route distribution contracts for Quantum State Objects.">
-  <title>QSO-PAYMENTS</title>
+  <meta name="description" content="QSO-PAYMENTS documents an audit-first boundary for payment intent, authorization, allocation, receipts, disputes, and disabled settlement adapters.">
+  <title>QSO-PAYMENTS — Audit-first payment intent</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,55 +12,97 @@
     <nav aria-label="Primary">
       <a class="brand" href="#top">QSO-PAYMENTS</a>
       <div class="nav-links">
-        <a href="#architecture">Architecture</a>
-        <a href="#routes">Distribution</a>
+        <a href="#authority">Authority</a>
+        <a href="#lifecycle">Lifecycle</a>
+        <a href="#environments">Environments</a>
         <a href="#safety">Safety</a>
+        <a href="#documentation">Documentation</a>
       </div>
     </nav>
     <section id="top" class="hero-content">
-      <p class="eyebrow">Quantum State Object Economic Layer</p>
+      <p class="eyebrow">Documentation-only charter candidate</p>
       <h1>Auditable payment intent without uncontrolled custody.</h1>
-      <p class="lede">QSO-PAYMENTS defines the contracts, records, and adapter boundaries needed for direct payments, revenue splits, royalties, validator rewards, escrow milestones, treasury allocations, storage fees, routing fees, and agent-execution credits.</p>
+      <p class="lede">QSO-PAYMENTS separates proposals, authorization, allocation, adapter handoff, receipts, disputes, and reconciliation so no generated recommendation can silently become permission to move assets.</p>
+      <p class="status"><strong>Current boundary:</strong> no custody, signing, credentials, testnet execution, production transfers, investment products, or guaranteed-return claims.</p>
       <div class="actions">
-        <a class="button primary" href="#architecture">Explore the design</a>
+        <a class="button primary" href="#authority">Explore the architecture</a>
+        <a class="button" href="PROJECT_GUIDE.md">Read the project guide</a>
         <a class="button" href="https://github.com/aevespers2/QSO-PAYMENTS">View repository</a>
       </div>
     </section>
   </header>
 
   <main>
-    <section id="architecture" class="section">
+    <section id="authority" class="section">
       <p class="eyebrow">Separation of authority</p>
-      <h2>Objects propose. Policies authorize. Adapters settle.</h2>
+      <h2>Objects propose. Policies evaluate. Authorized actors approve.</h2>
+      <div class="flow" aria-label="Payment authority flow">
+        <span>Proposal</span><b aria-hidden="true">→</b><span>Intent</span><b aria-hidden="true">→</b><span>Validation</span><b aria-hidden="true">→</b><span>Authorization</span><b aria-hidden="true">→</b><span>Allocation</span><b aria-hidden="true">→</b><span>Disabled adapter boundary</span><b aria-hidden="true">→</b><span>Evidence</span>
+      </div>
       <div class="grid three">
-        <article class="card"><h3>Intent</h3><p>A QSO emits a bounded payment intent describing purpose, amount, asset, recipients, provenance, and expiry.</p></article>
-        <article class="card"><h3>Authorization</h3><p>Policy gates validate approvals, limits, route totals, milestones, freeze points, and dispute state.</p></article>
-        <article class="card"><h3>Settlement</h3><p>An external adapter may execute an approved instruction and return a signed receipt. Adapters are disabled by default.</p></article>
+        <article class="card"><h3>Intent</h3><p>A bounded proposal identifies purpose, amount or unit, recipients, provenance, expiry, environment, and an idempotency key.</p></article>
+        <article class="card"><h3>Authorization</h3><p>An independent record identifies who approved what, under which limits and conditions, for which environment, and with what revocation state.</p></article>
+        <article class="card"><h3>Settlement boundary</h3><p>A separately approved adapter may eventually submit an authorized instruction. Adapters are disabled by default and documentation never proves production capability.</p></article>
+      </div>
+    </section>
+
+    <section id="lifecycle" class="section alt">
+      <p class="eyebrow">Record lifecycle</p>
+      <h2>Each stage adds evidence instead of rewriting history.</h2>
+      <div class="grid two">
+        <article class="card"><h3>Validate and authorize</h3><p>Malformed, duplicate, expired, prohibited, or policy-incompatible intents fail closed. A valid schema remains only a candidate for authorization.</p></article>
+        <article class="card"><h3>Allocate and reconcile</h3><p>Routes must sum to the approved total under explicit rounding, remainder, cap, and priority rules. Any mismatch stops the process.</p></article>
+        <article class="card"><h3>Record outcomes</h3><p>Simulation results, adapter failures, receipts, and unresolved status are distinct records linked to the original intent and approval.</p></article>
+        <article class="card"><h3>Dispute and recover</h3><p>Contested evidence is preserved with reason, reviewer, status, and permitted remediation. Rollback restores the last verified publication or disables a separately approved adapter.</p></article>
+      </div>
+    </section>
+
+    <section id="environments" class="section">
+      <p class="eyebrow">Explicit environment labels</p>
+      <h2>Documentation is not simulation. Simulation is not production.</h2>
+      <div class="grid two">
+        <article class="card"><h3>Documentation — current</h3><p>Concepts, trust boundaries, risks, and review procedures. No working payment service is implied.</p></article>
+        <article class="card"><h3>Simulation — future approval</h3><p>Deterministic fictional calculations without external credentials, custody, signing, or transfers.</p></article>
+        <article class="card"><h3>Testnet — separately governed</h3><p>Non-production integration using isolated credentials only after contract, security, and operational approval.</p></article>
+        <article class="card"><h3>Production — not authorized</h3><p>An independently audited and legally reviewed deployment. It cannot be inferred from documentation, fixtures, schemas, or testnet activity.</p></article>
       </div>
     </section>
 
     <section id="routes" class="section alt">
-      <p class="eyebrow">Multi-route distribution</p>
-      <h2>One intent, many accountable outcomes.</h2>
+      <p class="eyebrow">Documented allocation patterns</p>
+      <h2>Economic patterns are review categories, not enabled services.</h2>
       <div class="route-grid">
-        <span>Direct payment</span><span>Percentage split</span><span>Royalty</span><span>Validator reward</span><span>Escrow milestone</span><span>Pooled treasury</span><span>Storage fee</span><span>Routing fee</span><span>Agent execution</span><span>Fiat adapter</span><span>Stablecoin adapter</span><span>Internal credits</span>
+        <span>Direct allocation</span><span>Percentage split</span><span>Royalty rule</span><span>Validator reward</span><span>Escrow milestone</span><span>Pooled treasury</span><span>Storage fee</span><span>Routing fee</span><span>Agent credit</span><span>Fiat adapter concept</span><span>Stable-value adapter concept</span><span>Internal simulation units</span>
       </div>
     </section>
 
     <section id="safety" class="section">
       <p class="eyebrow">Fail-closed by design</p>
-      <h2>Every economic action remains bounded and reviewable.</h2>
+      <h2>Ambiguity, missing evidence, and excess authority stop the flow.</h2>
+      <div class="grid three">
+        <article class="card"><h3>No self-approval</h3><p>A QSO cannot authorize its own proposal, infer permission from identity, or convert prior behavior into financial authority.</p></article>
+        <article class="card"><h3>No repository secrets</h3><p>Credentials, private keys, and sensitive account identifiers must not appear in intents, public artifacts, fixtures, or generated documentation.</p></article>
+        <article class="card"><h3>No fabricated certainty</h3><p>Receipts are adapter evidence with stated limitations. Unresolved or unknown status is preserved instead of being reported as final settlement.</p></article>
+        <article class="card"><h3>Replay resistance</h3><p>Every future executable contract requires idempotency keys, expiry, duplicate detection, bounded retry, and explicit reconciliation.</p></article>
+        <article class="card"><h3>Privacy minimization</h3><p>Payment metadata is minimized, classified, redacted, and excluded from public evidence unless publication is explicitly authorized.</p></article>
+        <article class="card"><h3>Publication evidence</h3><p>A documentation release requires reproducible Pages output, link and accessibility checks, claims review, security/privacy review, hashes, provenance, and rollback evidence.</p></article>
+      </div>
+    </section>
+
+    <section id="documentation" class="section alt">
+      <p class="eyebrow">Developer documentation</p>
+      <h2>Start with the charter, then verify every claim.</h2>
       <div class="grid two">
-        <article class="card"><h3>Immutable evidence</h3><p>Intent, authorization, allocation, receipt, dispute, and settlement records are linked through append-only provenance.</p></article>
-        <article class="card"><h3>Explicit environments</h3><p>Simulation, testnet, and production are separate modes. Production transfer capability cannot be inferred from documentation or test fixtures.</p></article>
-        <article class="card"><h3>Freeze and rollback</h3><p>Missing approvals, invalid totals, expired intents, adapter errors, and policy mismatches stop processing before settlement.</p></article>
-        <article class="card"><h3>No autonomous custody</h3><p>QSOs do not hold private keys, sign transactions, or directly control external accounts.</p></article>
+        <article class="card"><h3>Project guide</h3><p>Purpose, terminology, environment labels, contract families, onboarding, threats, and documentation release gates.</p><a href="PROJECT_GUIDE.md">Open project guide</a></article>
+        <article class="card"><h3>Architecture</h3><p>Trust boundaries, invariants, record lifecycle, data classification, adapter requirements, dependencies, and verification strategy.</p><a href="ARCHITECTURE.md">Open architecture</a></article>
+        <article class="card"><h3>Task chain</h3><p>The approved order of work keeps charter and publication integrity ahead of schemas, simulations, adapters, or production claims.</p><a href="../taskchain.md">Open task chain</a></article>
+        <article class="card"><h3>Release plan</h3><p>The current candidate remains blocked until charter approval and publication evidence satisfy every included documentation gate.</p><a href="../release.md">Open release plan</a></article>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>QSO-PAYMENTS is an experimental, audit-first architecture. No page on this site constitutes a financial product, promise, or production settlement service.</p>
+    <p>QSO-PAYMENTS is an experimental, audit-first documentation project. Nothing on this site constitutes a financial product, investment offer, custody service, settlement service, legal certification, or promise of returns.</p>
   </footer>
 </body>
 </html>
