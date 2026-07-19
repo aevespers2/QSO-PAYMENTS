@@ -1,0 +1,82 @@
+:root {
+  --qso-accent: #116466;
+  --qso-warning: #7a4d00;
+}
+
+body {
+  line-height: 1.65;
+}
+
+.navbar {
+  border-bottom: 3px solid var(--qso-accent);
+}
+
+.bs-sidebar .nav > li > a {
+  padding-top: .42rem;
+  padding-bottom: .42rem;
+}
+
+main h1,
+main h2,
+main h3 {
+  scroll-margin-top: 5rem;
+}
+
+main h2 {
+  border-bottom: 1px solid #d7dde3;
+  padding-bottom: .3rem;
+  margin-top: 2.4rem;
+}
+
+code {
+  overflow-wrap: anywhere;
+}
+
+pre code {
+  overflow-wrap: normal;
+}
+
+blockquote {
+  border-left: 4px solid var(--qso-accent);
+  background: #f4f8f8;
+  padding: .8rem 1rem;
+}
+
+.admonition.warning {
+  border-left-color: var(--qso-warning);
+}
+
+.table-responsive,
+main table {
+  width: 100%;
+}
+
+main table th {
+  background: #eef3f5;
+}
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid #f0a202;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  main table {
+    display: block;
+    overflow-x: auto;
+    white-space: normal;
+  }
+}
