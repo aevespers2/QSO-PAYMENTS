@@ -21,10 +21,15 @@ States: `PROPOSED` · `READY` · `IN PROGRESS` · `BLOCKED` · `REVIEW` · `DONE
 | P2 | Publish versioned simulation-only schemas and fixtures | Architect | P1 and separate approval | BLOCKED | Intent, authorization, allocation, receipt, dispute, reconciliation, rounding, replay, and idempotency contracts validate deterministically without credentials, custody, or transfers. |
 | P3 | Evaluate disabled adapter interfaces | Architect | P2 and legal/security review | BLOCKED | Adapters remain disabled by default, contain no production credentials, and cannot be represented as settlement capability. |
 
+## Documentation milestone candidate
+
+PR #1 now contains a complete Pages-oriented documentation package: project and portfolio boundary, authority architecture, proposed contract semantics, trust and privacy model, onboarding, incident response, rollback, ADR-0001, strict MkDocs configuration, and pull-request build verification. This is candidate input to P1, not completion of P0 or P1. Charter approval, exact-head validation evidence, accessibility and claims review, artifact hashes, provenance, deployment verification, and rollback evidence remain required.
+
 ## Builder rules
 
-Documentation is the only active release surface. Do not add executable transfer paths, credentials, custody, or production adapter behavior.
+Documentation is the only active release surface. Do not add executable transfer paths, credentials, custody, or production adapter behavior. Do not mark P0 or P1 complete merely because documentation builds successfully.
 
 ## Builder log
 
-Record approvals, commits, publication runs, claim/accessibility/security reports, schema and fixture hashes if later authorized, artifact checksums, rollback evidence, and follow-ups.
+- 2026-07-19 — PR #1 substantially expanded the documentation-only candidate and added a pinned strict MkDocs build. No runtime authority or release gate was added or marked complete.
+- Record future approvals, commits, publication runs, claim/accessibility/security reports, schema and fixture hashes if later authorized, artifact checksums, rollback evidence, and follow-ups.
