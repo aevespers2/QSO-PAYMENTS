@@ -3,12 +3,15 @@ site_description: Audit-first economic intent, authorization, allocation, eviden
 site_url: https://aevespers2.github.io/QSO-PAYMENTS/
 repo_url: https://github.com/aevespers2/QSO-PAYMENTS
 repo_name: aevespers2/QSO-PAYMENTS
+edit_uri: edit/main/docs/
 copyright: Documentation-only charter candidate. No custody, signing, settlement, investment product, autonomous transfer, or promise of returns.
 
 theme:
-  name: mkdocs
-  navigation_depth: 3
-  highlightjs: true
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.action.edit
 
 nav:
   - Overview: index.md
@@ -33,9 +36,13 @@ markdown_extensions:
   - admonition
   - attr_list
   - def_list
-  - fenced_code
   - tables
   - toc:
       permalink: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 
 strict: true
