@@ -6,33 +6,33 @@ The architecture preserves a strict separation between economic proposals and ex
 
 ```mermaid
 flowchart TB
-    subgraph Proposal Plane
+    subgraph proposal["Proposal Plane"]
       Q[A.L.I.S.T.A.I.R.E., QSO, or human proposal]
       I[Payment intent record]
       Q --> I
     end
 
-    subgraph Review Plane
+    subgraph review["Review Plane"]
       S[Schema validation]
       P[Policy evaluation]
       U[Independent human or approved-service authorization]
       I --> S --> P --> U
     end
 
-    subgraph Accounting Plane
+    subgraph accounting["Accounting Plane"]
       L[Allocation calculation]
       E[Expected ledger entries]
       U --> L --> E
     end
 
-    subgraph External Boundary
+    subgraph external["External Boundary"]
       G[Adapter gate: disabled by default]
       T[External settlement system]
       E --> G
       G -. separately approved only .-> T
     end
 
-    subgraph Evidence Plane
+    subgraph evidence["Evidence Plane"]
       R[Receipt or failure record]
       C[Reconciliation]
       D[Dispute state]
@@ -77,63 +77,103 @@ stateDiagram-v2
     Allocated --> SimulationRecorded: documentation/simulation environment
     Allocated --> AdapterHeld: adapter disabled or approval absent
     Allocated --> Submitted: separately approved adapter
-    Submitted --> ReceiptRecorded
-    ReceiptRecorded --> Reconciled
-    ReceiptRecorded --> Disputed
-    Reconciled --> Disputed: later evidence
-    AdapterHeld --> [*]
-    SimulationRecorded --> [*]
+    Submitted --> ReceiptRecorded: receipt captured
+    Submitted --> Unknown: no trustworthy final state
+    ReceiptRecorded --> Reconciled: entries and receipt agree
+    ReceiptRecorded --> Disputed: mismatch or challenge
+    Unknown --> Reconciled: later evidence
+    Unknown --> Disputed: unresolved conflict
+    Reconciled --> [*]
+    Disputed --> [*]
     Rejected --> [*]
 ```
 
-## Data classification
+The lifecycle vocabulary is a design contract, not evidence that an adapter or settlement implementation exists.
 
-| Data class | Examples | Publication rule |
-|---|---|---|
-| Public documentation | Contract descriptions, fictional fixtures, diagrams | May be published after claims and accessibility review |
-| Internal operational | Workflow logs, adapter configuration, incident evidence | Restricted and retained according to policy |
-| Sensitive financial metadata | Account identifiers, counterparties, amounts tied to people | Minimize, redact, encrypt, and never publish by default |
-| Secrets | Credentials, private keys, signing material | Never store in repository records or generated documentation |
+## Capability separation
 
-## Adapter boundary
+| Capability | Documentation state | Runtime state | Required authority |
+|---|---|---|---|
+| Propose an economic intent | Defined | Not implemented | Bounded caller identity |
+| Validate shape and policy | Defined | Not implemented | Versioned schema and policy owner |
+| Authorize a transfer | Boundary defined | Not implemented | Independent named authority |
+| Calculate allocations | Defined | Not implemented | Reviewed deterministic algorithm |
+| Sign or submit | Prohibited by default | Not implemented | Environment-specific capability grant |
+| Record receipts | Defined | Not implemented | Approved adapter and evidence policy |
+| Reconcile or dispute | Defined | Not implemented | Accounting and human-review authority |
+| Override policy | Not granted | Not implemented | Explicit exceptional authority outside A.L.I.S.T.A.I.R.E. |
 
-An adapter interface may eventually accept an authorized, allocated instruction and return a structured result. Until separately approved, adapters remain conceptual or mocked. Any future adapter must document:
+## Trust boundaries
 
-- supported environment and network;
-- authentication and secret storage;
-- request signing and replay protection;
-- idempotency and retry behavior;
-- timeout, partial failure, and reconciliation semantics;
-- rate limits and dependency risks;
-- receipt verification and finality limitations;
-- disable, revocation, incident, and rollback procedures.
+```mermaid
+flowchart LR
+    subgraph public["Public and reviewable"]
+      DOC[Documentation]
+      SCHEMA[Public schemas]
+      FIX[Sanitized fixtures]
+      EVID[Redacted evidence]
+    end
 
-## Repository dependencies
+    subgraph controlled["Controlled repository or service"]
+      POLICY[Policy versions]
+      AUTHZ[Authorization records]
+      LEDGER[Internal expected ledger]
+      MON[Monitoring and reconciliation]
+    end
 
-QSO-PAYMENTS may consume read-only, versioned references from A.L.I.S.T.A.I.R.E.'s canonical architecture and from QSO-GENOMES, QuantumStateObjects, QSO-FABRIC, QSO-DIGITALIS, QSO-STUDIO, and Bridge. It must not import their execution or governance authority.
+    subgraph protected["Protected environment"]
+      CRED[Credentials]
+      KEY[Signing material]
+      ADAPTER[External adapter]
+      PII[Sensitive transaction data]
+    end
 
-- **Canonical A.L.I.S.T.A.I.R.E. root:** supplies approved portfolio objectives, subsystem ownership, and cross-repository decisions; it does not by itself authorize a payment.
-- **QuantumStateObjects:** may originate bounded proposal evidence; runtime identity is not an approver identity.
-- **QSO-GENOMES:** may provide versioned identity or invariant-policy references; a genome cannot confer financial permission.
-- **QSO-FABRIC:** may coordinate research or generate a bounded resource proposal; it cannot custody, sign, or settle.
-- **QSO-DIGITALIS:** may eventually carry versioned exchange envelopes; schema transport does not confer authority.
-- **QSO-STUDIO:** may display review packets and evidence; it cannot silently approve or settle.
-- **Bridge:** may return independently verified external evidence; verification does not create authorization.
-- **Autonomous-development control plane:** ownership remains unresolved; it may propose and consume evidence but must be separated from financial authorization and emergency disable authority.
+    DOC --> SCHEMA
+    SCHEMA --> POLICY
+    FIX --> EVID
+    POLICY --> AUTHZ
+    AUTHZ --> LEDGER
+    LEDGER --> MON
+    AUTHZ -. scoped grant .-> ADAPTER
+    CRED --> ADAPTER
+    KEY --> ADAPTER
+    PII --> ADAPTER
+    ADAPTER --> MON
+```
 
-Every cross-repository interface must identify its schema version, provenance, environment, authority class, data classification, retention rule, and failure behavior.
+Protected data never becomes a public fixture merely because a workflow succeeds. Public evidence must be redacted, minimized, and independently reviewed.
 
-## Verification strategy
+## Repository dependency position
 
-For the documentation candidate:
+QSO-PAYMENTS depends on accepted upstream identity, capability, canonicalization, evidence, and review contracts. It must not define competing canonical identities or infer authority from a repository name.
 
-- validate links, HTML, metadata, and responsive layout;
-- assert that pull-request builds use the submitted immutable head;
-- review every claim against the current documentation-only boundary;
-- test keyboard navigation, focus visibility, semantics, scaling, and contrast;
-- inspect workflow permissions and action pinning;
-- verify no secrets or sensitive identifiers are present;
-- build from a clean checkout and hash the artifact;
-- record rollback to the prior verified Pages artifact.
+Provisional boundaries:
 
-For a later simulation candidate, add deterministic schema validation, allocation/reconciliation fixtures, duplicate/replay tests, rounding edge cases, timeout and failure tests, and explicit proof that no external transfer path is reachable.
+- **Bridge** may transport approved proposal and evidence envelopes but does not grant payment authority.
+- **QSO-DIGITALIS** may define coordination records but does not hold credentials or settle transactions.
+- **QSO-STUDIO** may present review evidence but does not autonomously approve economic actions.
+- **QSO-SEEKER** may retrieve approved public information but does not fetch private financial records without a separate deployment authorization.
+- **QuantumStateObjects** may model bounded object state but does not inherit signing, custody, or transfer capability.
+- **QSO-FABRIC** may coordinate bounded experiments but does not self-fund or approve production transfers.
+
+Every integration remains blocked until exact contract versions, fixture hashes, authority ownership, migration rules, and rollback behavior are accepted.
+
+## Failure behavior
+
+The subsystem must fail closed when:
+
+- identity, environment, currency, amount, policy, or authorization is absent;
+- totals do not reconcile;
+- a capability is expired, revoked, or outside scope;
+- idempotency state is missing;
+- receipt evidence is malformed or contradictory;
+- credentials or signing material appear in public records;
+- an autonomous caller attempts self-authorization;
+- production is selected without an approved transition record; or
+- system state is unknown.
+
+A failure emits a bounded reason code and evidence reference. It does not silently retry, broaden authority, or reinterpret a proposal as approval.
+
+## Deployment boundary
+
+The documentation can be built in CI with read-only repository access. Any future application, worker, adapter, queue, database, custody provider, signing service, or settlement integration requires a separate architecture decision, threat model, credential ceremony, environment approval, observability plan, incident owner, tested rollback, and post-deployment verification.
