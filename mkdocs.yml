@@ -1,9 +1,9 @@
 site_name: QSO-PAYMENTS
-site_description: Audit-first payment intent, authorization, allocation, evidence, and disabled adapter boundaries for the QSO ecosystem.
+site_description: Audit-first economic intent, authorization, allocation, evidence, and disabled adapter boundaries for A.L.I.S.T.A.I.R.E.
 site_url: https://aevespers2.github.io/QSO-PAYMENTS/
 repo_url: https://github.com/aevespers2/QSO-PAYMENTS
 repo_name: aevespers2/QSO-PAYMENTS
-copyright: Documentation-only charter candidate. No custody, signing, settlement, investment product, or promise of returns.
+copyright: Documentation-only charter candidate. No custody, signing, settlement, investment product, autonomous transfer, or promise of returns.
 
 theme:
   name: mkdocs
@@ -14,6 +14,7 @@ nav:
   - Overview: index.md
   - Project guide: PROJECT_GUIDE.md
   - Architecture: ARCHITECTURE.md
+  - A.L.I.S.T.A.I.R.E. integration: ALISTAIRE_INTEGRATION.md
   - Design contracts: DESIGN_CONTRACTS.md
   - Developer onboarding: ONBOARDING.md
   - Security and privacy: SECURITY_PRIVACY.md
