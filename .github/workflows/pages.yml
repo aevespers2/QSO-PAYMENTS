@@ -4,6 +4,11 @@ on:
   pull_request:
     paths:
       - "docs/**"
+      - "README.md"
+      - "taskchain.md"
+      - "release.md"
+      - "changelog.md"
+      - "punchlist.md"
       - "mkdocs.yml"
       - "requirements-docs.txt"
       - ".github/workflows/pages.yml"
@@ -11,6 +16,11 @@ on:
     branches: [main]
     paths:
       - "docs/**"
+      - "README.md"
+      - "taskchain.md"
+      - "release.md"
+      - "changelog.md"
+      - "punchlist.md"
       - "mkdocs.yml"
       - "requirements-docs.txt"
       - ".github/workflows/pages.yml"
@@ -18,22 +28,31 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages-${{ github.ref }}
+  group: pages-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    env:
+      CHECKOUT_REF: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
     steps:
-      - name: Checkout
+      - name: Checkout submitted source
         uses: actions/checkout@v4
         with:
+          ref: ${{ env.CHECKOUT_REF }}
           persist-credentials: false
+
+      - name: Assert immutable source identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          actual_sha="$(git rev-parse HEAD)"
+          test "$actual_sha" = "$CHECKOUT_REF"
+          printf 'source_sha=%s\n' "$actual_sha" | tee source-identity.txt
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -48,6 +67,35 @@ jobs:
       - name: Build documentation strictly
         run: mkdocs build --strict
 
+      - name: Generate documentation evidence manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from hashlib import sha256
+          from pathlib import Path
+
+          root = Path("site")
+          lines = []
+          for path in sorted(p for p in root.rglob("*") if p.is_file()):
+              digest = sha256(path.read_bytes()).hexdigest()
+              lines.append(f"{digest}  {path.as_posix()}")
+          Path("documentation-sha256.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
+          PY
+          cat source-identity.txt documentation-sha256.txt > documentation-evidence.txt
+
+      - name: Upload reviewable documentation artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: qso-payments-docs-${{ env.CHECKOUT_REF }}
+          path: |
+            site
+            source-identity.txt
+            documentation-sha256.txt
+            documentation-evidence.txt
+          if-no-files-found: error
+          retention-days: 14
+
       - name: Upload Pages artifact
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v3
@@ -57,6 +105,9 @@ jobs:
   deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
