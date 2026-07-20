@@ -7,7 +7,7 @@ The architecture preserves a strict separation between economic proposals and ex
 ```mermaid
 flowchart TB
     subgraph Proposal Plane
-      Q[QSO or human proposal]
+      Q[A.L.I.S.T.A.I.R.E., QSO, or human proposal]
       I[Payment intent record]
       Q --> I
     end
@@ -15,7 +15,7 @@ flowchart TB
     subgraph Review Plane
       S[Schema validation]
       P[Policy evaluation]
-      U[Human or approved-service authorization]
+      U[Independent human or approved-service authorization]
       I --> S --> P --> U
     end
 
@@ -42,9 +42,15 @@ flowchart TB
     end
 ```
 
+## A.L.I.S.T.A.I.R.E. subsystem boundary
+
+A.L.I.S.T.A.I.R.E. is the canonical system objective. QSO-PAYMENTS is a subordinate economic-intent and evidence subsystem, not the portfolio control plane. The control plane may request that this subsystem represent and validate a resource proposal, but it cannot inherit payment authorization, credentials, custody, signing, settlement, merge, deployment, or policy-exception authority from this repository.
+
+The full portfolio interaction, capability matrix, and unresolved ownership decisions are documented in [A.L.I.S.T.A.I.R.E. Integration Boundary](ALISTAIRE_INTEGRATION.md).
+
 ## Invariants
 
-1. A QSO cannot approve its own payment intent.
+1. A QSO or autonomous-development service cannot approve its own payment intent.
 2. A valid schema is not authorization.
 3. Authorization is scoped, revocable, attributable, and environment-specific.
 4. Allocations reconcile exactly under declared rounding and remainder rules.
@@ -54,6 +60,8 @@ flowchart TB
 8. Original intent, authorization, allocation, receipt, and dispute records are append-only.
 9. Replays and retries use idempotency keys and cannot duplicate an economic action.
 10. `UNKNOWN` or unresolved status is preferable to inventing settlement certainty.
+11. Repository, QSO, genome, task, or system identity never implies financial capability.
+12. A documentation, simulation, testnet, or production transition requires an explicit, separately recorded decision.
 
 ## Record lifecycle
 
@@ -102,13 +110,25 @@ An adapter interface may eventually accept an authorized, allocated instruction 
 
 ## Repository dependencies
 
-QSO-PAYMENTS may consume read-only, versioned references from QSO-GENOMES, QuantumStateObjects, QSO-FABRIC, and QSO-STUDIO. It must not import their execution authority. QSO-STUDIO may display payment evidence, but it cannot authorize or settle. QSO-FABRIC may generate bounded proposals, but it cannot custody or sign. Upstream identity or genome metadata does not confer financial permission.
+QSO-PAYMENTS may consume read-only, versioned references from A.L.I.S.T.A.I.R.E.'s canonical architecture and from QSO-GENOMES, QuantumStateObjects, QSO-FABRIC, QSO-DIGITALIS, QSO-STUDIO, and Bridge. It must not import their execution or governance authority.
+
+- **Canonical A.L.I.S.T.A.I.R.E. root:** supplies approved portfolio objectives, subsystem ownership, and cross-repository decisions; it does not by itself authorize a payment.
+- **QuantumStateObjects:** may originate bounded proposal evidence; runtime identity is not an approver identity.
+- **QSO-GENOMES:** may provide versioned identity or invariant-policy references; a genome cannot confer financial permission.
+- **QSO-FABRIC:** may coordinate research or generate a bounded resource proposal; it cannot custody, sign, or settle.
+- **QSO-DIGITALIS:** may eventually carry versioned exchange envelopes; schema transport does not confer authority.
+- **QSO-STUDIO:** may display review packets and evidence; it cannot silently approve or settle.
+- **Bridge:** may return independently verified external evidence; verification does not create authorization.
+- **Autonomous-development control plane:** ownership remains unresolved; it may propose and consume evidence but must be separated from financial authorization and emergency disable authority.
+
+Every cross-repository interface must identify its schema version, provenance, environment, authority class, data classification, retention rule, and failure behavior.
 
 ## Verification strategy
 
 For the documentation candidate:
 
 - validate links, HTML, metadata, and responsive layout;
+- assert that pull-request builds use the submitted immutable head;
 - review every claim against the current documentation-only boundary;
 - test keyboard navigation, focus visibility, semantics, scaling, and contrast;
 - inspect workflow permissions and action pinning;
