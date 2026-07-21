@@ -2,175 +2,224 @@
 
 ## Portfolio role
 
-A.L.I.S.T.A.I.R.E. is the canonical system objective. QSO-PAYMENTS is its bounded **economic-intent and evidence subsystem**: it may describe resource needs, proposed allocations, approval requests, expected accounting effects, adapter requirements, receipts, disputes, and reconciliation states. It does not own autonomous-development orchestration and it does not confer authority to hold credentials, sign transactions, custody assets, or move funds.
+A.L.I.S.T.A.I.R.E. is the canonical system objective. QSO-PAYMENTS is its bounded **economic-intent, allocation-preview, evidence, dispute, and reconciliation subsystem**. It may describe resource needs, proposed allocations, approval requests, expected accounting effects, adapter requirements, receipts, reversals, disputes, and reconciliation states.
 
-The distinction is deliberate. A system may autonomously discover that work requires a resource, estimate a budget, compare options, prepare an approval packet, and verify returned evidence without autonomously acquiring financial authority.
+It does not own autonomous-development orchestration, generic capability issuance, financial approval, credentials, signing, custody, adapter operation, or settlement.
 
-> **Current release surface:** documentation only. Every interface on this page is an architectural contract proposal, not an executable payment path.
+> **Current release surface:** documentation only. Every interface on this page is a contract proposal, not an executable payment path.
 
 ## Contribution to autonomous development
 
-QSO-PAYMENTS can support faster autonomous engineering by making economic reasoning explicit and reviewable:
+QSO-PAYMENTS can support faster engineering by making economic reasoning explicit and reviewable:
 
-- record a bounded resource request linked to an objective and task;
-- distinguish estimated cost from approved limit and actual receipt;
+- record a bounded resource request linked to an objective, task, and repository;
+- distinguish estimated cost, requested cap, approved limit, committed amount, actual receipt, and reconciled amount;
 - compare fictional or externally supplied options without purchasing;
-- prepare an authorization request for a designated human or approved service;
-- preserve immutable evidence of approval, denial, expiry, revocation, failure, or dispute;
-- reconcile returned receipts against the approved intent;
-- expose unresolved or contradictory evidence instead of inventing success.
+- prepare an authorization request for a named human or separately approved financial service;
+- preserve evidence of approval, denial, expiry, revocation, hold, failure, reversal, dispute, or reconciliation;
+- reconcile returned evidence against the accepted intent and capability;
+- expose missing, stale, contradictory, or unverifiable evidence instead of inventing success.
 
-It cannot turn system urgency, model confidence, prior approval, repository ownership, or a QSO genome into financial permission.
+System urgency, model confidence, a QSO genome, repository ownership, generic capability, prior approval, UI state, or adapter success cannot become financial permission by implication.
+
+## Portfolio assignments
+
+| Concern | Candidate responsibility | Authority limit |
+|---|---|---|
+| Product governance | `ALISTAIRE-` | Defines accepted portfolio boundaries; does not approve individual payments |
+| Resource proposal and engineering context | Repository `0` | May prepare a local proposal and evidence; cannot approve or fund it |
+| Economic intent and reconciliation | QSO-PAYMENTS | Validates and records economic semantics; holds no credentials or custody |
+| Human review | QSO-STUDIO or another approved interface | Presents evidence and captures attributable decisions; presentation is not authority |
+| Financial authorization | Named human or separately approved financial authority | Approves exact amount, destination class, environment, conditions, and expiry |
+| Generic capability and canonical disposition | Repository `1`, if approved | May admit, narrow, revoke, and record an execution capability after financial approval; cannot invent approval |
+| Declarative identity/policy | QSO-GENOMES | Provides versioned references; cannot grant financial authority |
+| Collaboration budgets | QSO-FABRIC | May produce or consume bounded budget proposals; cannot approve or settle them |
+| Exchange profiles | QSO-DIGITALIS | Provides inert versioned projections where approved; no execution authority |
+| Transport/evidence profile | Bridge or extracted approved profile | Carries or validates evidence; transport success is not financial finality |
+| External adapter | Separately governed service, disabled | Uses isolated credentials only under an accepted unexpired capability |
+
+Repository names do not establish authority. Every consequential role requires an approved contract, identity, and revocation path.
 
 ## Portfolio context
 
 ```mermaid
 flowchart LR
-    ROOT[A.L.I.S.T.A.I.R.E. canonical architecture and roadmap]
-    SEEKER[QSO-SEEKER\nresearch and evidence acquisition]
-    RUNTIME[QuantumStateObjects\nbounded execution and evidence]
-    FABRIC[QSO-FABRIC\ncollaboration and experiment coordination]
-    GENOMES[QSO-GENOMES\nidentity and invariant policy references]
-    DIGITALIS[QSO-DIGITALIS\nversioned exchange contracts]
-    PAY[QSO-PAYMENTS\neconomic intent and evidence]
-    STUDIO[QSO-STUDIO\nhuman review and visualization]
-    BRIDGE[Bridge\nexternal verification boundary]
-    CONTROL[Autonomous-development control plane\nownership unresolved]
-    AUTH[Independent financial authorization\nownership unresolved]
-    ADAPTER[External settlement adapter\ndisabled]
+    ROOT["ALISTAIRE-\nportfolio governance"]
+    R0["Repository 0\nresource proposal"]
+    PAY["QSO-PAYMENTS\neconomic intent and reconciliation"]
+    STUDIO["QSO-STUDIO\nreview surface"]
+    FA["Independent financial authority"]
+    R1["Repository 1\ncapability admission and canonical disposition"]
+    ADAPTER["External adapter\ndisabled"]
+    BRIDGE["Bridge/evidence profile"]
+    FABRIC["QSO-FABRIC\nbounded budget consumer"]
+    GENOMES["QSO-GENOMES\nidentity and policy references"]
+    DIGITALIS["QSO-DIGITALIS\nexchange profiles"]
 
-    ROOT --> CONTROL
-    SEEKER --> CONTROL
-    RUNTIME --> CONTROL
-    FABRIC --> CONTROL
-    GENOMES -. policy reference .-> CONTROL
-    DIGITALIS -. versioned envelopes .-> PAY
-    CONTROL -->|resource proposal only| PAY
-    PAY -->|review packet and evidence| STUDIO
-    BRIDGE -. independently verified evidence .-> PAY
-    STUDIO -->|human decision surface| AUTH
-    AUTH -->|scoped authorization only| PAY
-    PAY -->|authorized allocation; current scope stops here| ADAPTER
+    ROOT --> R0
+    R0 -->|resource proposal| PAY
+    GENOMES -. descriptive references .-> PAY
+    DIGITALIS -. versioned profile .-> PAY
+    PAY -->|review packet| STUDIO
+    STUDIO -->|attributable decision request| FA
+    FA -->|financial authorization| PAY
+    PAY -->|capability-admission request| R1
+    R1 -->|narrow execution capability| ADAPTER
+    ADAPTER -. execution evidence .-> BRIDGE
+    BRIDGE -. preserved evidence .-> PAY
+    PAY -->|reconciliation proposal| R1
+    PAY -->|bounded budget status| FABRIC
 ```
 
-The autonomous-development control plane and the independent financial authorization authority are separate concerns. They may exchange signed, versioned records in a future approved design, but they must not silently collapse into one service or identity.
+The independent financial authority and Repository `1` are separate concerns. Repository `1` may verify and admit an approved financial authorization into a narrower technical capability, but it must not create or broaden financial approval.
 
 ## End-to-end resource lifecycle
 
 ```mermaid
 sequenceDiagram
-    participant C as Development control plane
+    participant R0 as Repository 0
     participant P as QSO-PAYMENTS
-    participant S as QSO-STUDIO
-    participant A as Independent authorizer
-    participant X as Disabled adapter boundary
-    participant E as Evidence/reconciliation
+    participant S as Review surface
+    participant F as Financial authority
+    participant R1 as Repository 1
+    participant X as Disabled adapter
+    participant E as Evidence profile
 
-    C->>P: Resource proposal + objective + provenance
-    P->>P: Validate environment, limits, expiry, and policy reference
-    P-->>C: Rejection evidence if invalid or prohibited
+    R0->>P: Resource proposal + objective + provenance
+    P->>P: Validate identity, environment, cap, expiry, replay, and policy
+    P-->>R0: Rejection evidence if invalid or prohibited
     P->>S: Reviewable intent and allocation preview
-    S->>A: Explicit approval request
-    A-->>P: Approve, deny, expire, or revoke within scope
-    P->>P: Deterministic allocation and reconciliation preview
-    P-->>X: Held instruction; no adapter authority in current scope
-    X-->>E: Fictional or separately supplied result evidence
-    E-->>P: Receipt, failure, unknown, or dispute record
-    P-->>C: Evidence summary without inferred finality
+    S->>F: Attributable approval request
+    F-->>P: Approve, deny, expire, or revoke exact financial scope
+    P->>R1: Capability-admission request + authorization evidence
+    R1->>R1: Verify authenticity, scope, policy, expected state, and revocation
+    R1-->>X: Narrow capability; current scope stops before execution
+    X-->>E: Separately supplied simulation or future adapter evidence
+    E-->>P: Pending, receipt, failure, unknown, reversal, or dispute evidence
+    P->>P: Reconcile without inferred finality
+    P-->>R1: Canonical-disposition proposal
+    P-->>R0: Bounded evidence summary without credentials
 ```
 
-At the current documentation stage, the sequence ends at a documented, disabled adapter boundary. No repository artifact or workflow can progress the sequence into a transfer.
+At the current documentation stage, the sequence ends at a disabled adapter boundary. No repository artifact or workflow can progress the sequence into a transfer.
 
 ## Interface contracts
 
-### Input from the development control plane
+### Repository `0` → QSO-PAYMENTS
 
 A future resource proposal should include:
 
-- immutable proposal identifier and schema version;
+- immutable proposal ID and schema version;
 - A.L.I.S.T.A.I.R.E. objective, task, and repository references;
 - purpose and necessity statement;
-- requested unit, amount, cap, and expiry;
-- fictional option comparison or externally sourced quote references;
-- requester identity, provenance, and environment;
-- declared conflicts, alternatives, and consequences of denial;
-- idempotency key and policy-profile reference.
+- requested unit, amount, cap, environment, and expiry;
+- fictional option comparison or attributed quote references;
+- requester, device/environment, and provenance references;
+- conflicts, alternatives, and consequences of denial;
+- idempotency key, replay domain, and policy-profile reference.
 
 The input must not contain credentials, private keys, complete payment-account identifiers, or an assertion that authorization already exists.
 
-### Output to human review
+### QSO-PAYMENTS → review surface
 
-A review packet should make the following independently visible:
+A review packet must make independently visible:
 
-1. requested outcome and evidence;
-2. proposed amount and maximum authorized exposure;
-3. allocation and rounding rules;
+1. requested outcome and supporting evidence;
+2. proposed amount, unit, fees, taxes, and maximum exposure;
+3. allocation, precision, rounding, and remainder rules;
 4. environment and adapter status;
-5. privacy classification and retention policy;
-6. expiry, revocation, retry, and dispute rules;
-7. uncertainty, missing evidence, and unresolved conflicts;
-8. the exact authority being requested.
+5. quote source, valuation time, and freshness;
+6. privacy classification and retention policy;
+7. expiry, revocation, retry, correction, and dispute rules;
+8. uncertainty, missing evidence, and conflicts;
+9. the exact financial authority being requested.
 
-### Returned authorization
+### Financial authority → QSO-PAYMENTS
 
-Authorization must be a separate, attributable record. It should identify the approver or approved service role, exact scope, amount limit, destinations or allowed classes, environment, conditions, timestamps, expiry, revocation state, and policy version. Approval for one intent cannot authorize another intent, another environment, or a wider capability.
+Authorization must be a separate attributable record. It identifies the approver or approved service role, exact intent, amount limit, destination or destination class, environment, conditions, timestamps, expiry, revocation path, jurisdictional assumptions, and policy version.
 
-### Evidence returned to A.L.I.S.T.A.I.R.E.
+Approval for one intent cannot authorize another intent, another environment, a larger amount, a different destination, or a reusable spending capability.
 
-The development system may receive status and evidence such as `DENIED`, `EXPIRED`, `REVOKED`, `HELD`, `SIMULATED`, `FAILED`, `UNKNOWN`, `DISPUTED`, or `RECONCILED`. It must not receive reusable credentials or treat an adapter receipt as unconditional proof of legal or financial finality.
+### QSO-PAYMENTS → Repository `1`
+
+A capability-admission request binds the accepted authorization to an exact execution purpose, adapter, environment, expected pre-state, amount, destination class, duration, nonce, evidence obligations, and rollback path.
+
+Repository `1` may reject or narrow the request. It cannot broaden it or create financial approval when the authorization is absent, invalid, stale, expired, revoked, unsupported, or mismatched.
+
+### Adapter/evidence profile → QSO-PAYMENTS
+
+Returned evidence may use states such as `SUBMITTED`, `PENDING`, `FAILED`, `UNKNOWN`, `DISPUTED`, `REVERSED`, or `RECONCILED`. It must identify the intent, authorization, capability, adapter, attempt, timestamps, amounts, fees, redacted destination reference, provisional/final status, raw-evidence hash, and correction route.
+
+The development system receives bounded summaries and evidence references, never reusable credentials. An adapter receipt is not unconditional proof of legal or financial finality.
 
 ## Capability and authority matrix
 
-| Capability | QSO-PAYMENTS | Development control plane | Human/approved authorizer | External adapter |
-|---|---:|---:|---:|---:|
-| Propose a resource need | Record and validate | Yes | May review | No |
-| Estimate or compare fictional costs | Document future contract | May request | May review | No |
-| Approve financial scope | No | No | Yes, if designated | No |
-| Hold credentials or signing material | No | No by inheritance | Only under separate policy | Adapter-specific, separately governed |
-| Allocate an approved total | Future deterministic simulation | No | Approves rules/limits | No |
-| Submit a transfer | No | No | No direct submission by implication | Disabled until separate approval |
-| Record receipts and disputes | Future evidence contract | May consume summaries | May adjudicate | May return evidence |
-| Infer success from missing evidence | Never | Never | Never | Never |
+| Capability | QSO-PAYMENTS | Repository `0` | Financial authority | Repository `1` | External adapter |
+|---|---:|---:|---:|---:|---:|
+| Propose a resource need | Record/validate | Yes | May review | No | No |
+| Estimate fictional costs | Document contract | May request | May review | No | No |
+| Approve financial scope | No | No | Yes, if designated | No by implication | No |
+| Admit narrow technical capability | Request only | No | Supplies approval evidence | Candidate, if approved | No |
+| Hold credentials or signing material | No | No | Only under separate policy | No by inheritance | Adapter-specific, separately governed |
+| Allocate an approved total | Future offline simulation | No | Approves rules and limits | May verify capability scope | No |
+| Submit a transfer | No | No | No direct submission by implication | Capability only, if approved | Disabled until separate approval |
+| Record receipts and disputes | Future evidence contract | May consume summaries | May adjudicate | May record disposition | May return evidence |
+| Infer success from missing evidence | Never | Never | Never | Never | Never |
 
 ## Autonomous evolution constraints
 
-A.L.I.S.T.A.I.R.E. may autonomously propose improvements to QSO-PAYMENTS documentation, schemas, fixtures, tests, threat models, and review packets. Consequential changes remain gated:
+A.L.I.S.T.A.I.R.E. may propose improvements to documentation, schemas, fixtures, tests, threat models, and review packets. It may not:
 
-- no self-granting of financial capabilities;
-- no self-approval of an intent or policy exception;
-- no creation, retrieval, rotation, or use of production credentials;
-- no change from documentation to simulation, testnet, or production by implication;
-- no weakening of expiry, revocation, idempotency, privacy, or audit requirements;
-- no merging or deployment authority inherited from a QSO identity or genome;
-- no representation of legal, regulatory, security, or accessibility approval without retained evidence.
+- grant itself financial capabilities;
+- approve its own intent or policy exception;
+- create, retrieve, rotate, or use payment credentials;
+- change from documentation to simulation, testnet, or production by implication;
+- weaken expiry, revocation, idempotency, replay, privacy, finality, evidence, or audit requirements;
+- inherit merge, release, deployment, custody, signing, or financial authority from a QSO identity, genome, repository, model, or successful workflow;
+- represent legal, regulatory, security, accessibility, or financial approval without retained attributable evidence.
 
-Autonomous development accelerates preparation and verification; it does not erase the separation of duties.
+Autonomous development accelerates preparation and verification; it does not erase separation of duties.
 
 ## Failure containment
 
-A payment-related failure must remain contained from the wider cognitive system. Minimum controls for any future executable candidate include:
+Minimum controls for any future executable candidate include:
 
 - fail-closed environment and adapter gates;
-- per-intent amount, destination, frequency, and time limits;
-- independent authorization and revocation;
-- idempotency and duplicate suppression;
-- append-only evidence and correction records;
-- explicit `UNKNOWN` and partial-failure states;
-- credential isolation outside QSO records and public artifacts;
-- emergency disable independent of the development control plane;
-- incident preservation and cross-repository rollback references.
+- per-intent amount, destination, frequency, time, and objective limits;
+- independent financial authorization, capability admission, revocation, and emergency stop;
+- shared idempotency and replay domains;
+- append-only evidence, correction, supersession, and dispute records;
+- explicit pending, unknown, partial-failure, reversal, and recovery states;
+- credential isolation outside QSO records, repositories, logs, model context, and public artifacts;
+- emergency disable independent of Repository `0`, QSO-PAYMENTS, and the adapter;
+- incident preservation, cache invalidation, and cross-repository bounded restart.
+
+## Required gluing evidence
+
+The route is not accepted until shared deterministic fixtures prove:
+
+- proposal-to-intent mapping without authority promotion;
+- financial authorization distinct from generic capability;
+- scope is equal or narrower across intent, authorization, capability, and adapter instruction;
+- stale, replayed, wrong-identity, over-limit, wrong-destination, wrong-environment, expired, and revoked records fail closed;
+- fixed-precision allocation, fees, taxes, rounding, and remainders reconcile;
+- pending, partial failure, retries, reversal, refund, dispute, and correction preserve evidence;
+- adapter evidence transformations preserve raw hashes, redaction declarations, uncertainty, and finality limits;
+- emergency stop revokes active capabilities, preserves evidence, invalidates caches, and requires explicit recovery approval.
+
+See the [obstruction and gluing analysis](OBSTRUCTION_AND_GLUING.md) for the full ledger and witness groups.
 
 ## Ownership decisions still required
 
-The portfolio must designate, without silently assigning authority to this repository:
+The portfolio must designate:
 
-1. the canonical autonomous-development control plane;
-2. the authority allowed to issue and revoke financial capability grants;
-3. the owner of identity, policy, and authorization schema versions;
-4. jurisdictional, privacy, retention, licensing, and review assumptions;
-5. the owner of adapter credentials, signing, custody, monitoring, and incident response;
-6. the human approvals required for simulation, testnet, and production transitions;
-7. portfolio-wide emergency-stop and rollback coordination;
-8. how Bridge, QSO-DIGITALIS, and QSO-STUDIO exchange evidence without inheriting authority.
+1. the independent financial authority and revoker;
+2. Repository `1`'s accepted or rejected role in capability admission and canonical disposition;
+3. the owner of intent, authorization, capability, receipt, dispute, reconciliation, correction, and revocation schemas;
+4. canonical identity and subject namespaces;
+5. jurisdictions, currencies, rails, privacy classes, retention periods, and licensing assumptions;
+6. adapter credentials, signing, custody, monitoring, incident, emergency-stop, and recovery owners;
+7. human approvals required for simulation, testnet, and production transitions;
+8. how Bridge, QSO-DIGITALIS, QSO-STUDIO, QSO-FABRIC, Repository `0`, and Repository `1 exchange records without inheriting authority.
 
-Until those decisions are approved and recorded, QSO-PAYMENTS remains a documentation-only subsystem with a disabled external boundary.
+Until those decisions are approved and recorded, QSO-PAYMENTS remains documentation-only with every external boundary disabled.
