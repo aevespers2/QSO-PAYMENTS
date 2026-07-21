@@ -1,5 +1,5 @@
 site_name: QSO-PAYMENTS
-site_description: Audit-first economic intent, authorization, allocation, evidence, gluing analysis, and disabled adapter boundaries for A.L.I.S.T.A.I.R.E.
+site_description: Audit-first economic intent, portable trust separation, authorization, allocation, evidence, gluing analysis, and disabled adapter boundaries for A.L.I.S.T.A.I.R.E.
 site_url: https://aevespers2.github.io/QSO-PAYMENTS/
 repo_url: https://github.com/aevespers2/QSO-PAYMENTS
 repo_name: aevespers2/QSO-PAYMENTS
@@ -18,6 +18,7 @@ nav:
   - Project guide: PROJECT_GUIDE.md
   - Architecture: ARCHITECTURE.md
   - A.L.I.S.T.A.I.R.E. integration: ALISTAIRE_INTEGRATION.md
+  - Portable trust and financial authority: PORTABLE_TRUST_FINANCIAL_BOUNDARY.md
   - Obstruction and gluing analysis: OBSTRUCTION_AND_GLUING.md
   - Design contracts: DESIGN_CONTRACTS.md
   - Developer onboarding: ONBOARDING.md
