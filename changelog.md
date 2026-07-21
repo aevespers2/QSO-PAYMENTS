@@ -7,6 +7,7 @@
 - 2026-07-16 — Blocked executable simulation work pending approval of terminology, jurisdictions, privacy, license, compliance assumptions, and prohibited production capabilities.
 - 2026-07-20 — Defined QSO-PAYMENTS as A.L.I.S.T.A.I.R.E.'s bounded economic-intent and evidence subsystem rather than the autonomous-development or financial-authority control plane.
 - 2026-07-21 — Refined the subsystem role to economic intent, allocation preview, evidence, dispute, and reconciliation; preserved financial approval, capability issuance, custody, and settlement as independent responsibilities.
+- 2026-07-21 — Added the portable device-trust boundary so a known, enrolled, or baseline-compliant device cannot be represented as financially authorized.
 
 ### Architecture
 - Intent and policy remain separate from authorization, capability admission, custody, adapter execution, reconciliation, canonical disposition, and settlement; future adapters are disabled and out of the first release.
@@ -18,6 +19,9 @@
 - 2026-07-21 — Added an obstruction and gluing analysis with 18 active compatibility failures, eight pairwise contract edges, six triple-overlap witness groups, explicit result semantics, and an acceptance order.
 - 2026-07-21 — Documented the lowest-coupling route as Repository `0` proposal → QSO-PAYMENTS intent → independent financial authorization → Repository `1` narrow capability → disabled adapter → evidence → reconciliation → canonical disposition.
 - 2026-07-21 — Clarified that Repository `1` cannot create financial approval by implication and that adapter execution cannot force canonical or legal finality.
+- 2026-07-21 — Added separate device, enrollment, workspace, requester, beneficiary, financial-authority, capability, adapter, destination, and receipt subjects.
+- 2026-07-21 — Added wrong-device and wrong-workspace rejection, lost/stolen/revoked/replacement-device behavior, and independent device, financial, and adapter stop domains.
+- 2026-07-21 — Added pairwise and triple-overlap witnesses joining Repositories `0` and `1`, QSO-PAYMENTS, review surfaces, adapters, incident authority, and recovery without authority promotion.
 
 ### Documentation
 - 2026-07-19 — Added a project guide and architecture reference covering purpose, onboarding, contract families, threat model, release gates, and rollback boundaries.
@@ -25,30 +29,34 @@
 - 2026-07-19 — Replaced the single static landing page with a navigable MkDocs site and expanded the README documentation map.
 - 2026-07-20 — Added a dedicated A.L.I.S.T.A.I.R.E. integration guide and reconciled the README, project guide, architecture, Pages navigation, task chain, release plan, punch list, and changelog around the canonical system objective.
 - 2026-07-21 — Added the obstruction and gluing page to MkDocs navigation and aligned README, task chain, punch list, release plan, and changelog with the current Repository `0`/`1` portfolio model.
+- 2026-07-21 — Added the Portable Trust and Financial Authority Boundary to Pages navigation and aligned task, release, and review gates with device/workspace bindings, privacy separation, revocation, and recovery.
 
 ### Accessibility
 - 2026-07-19 — Added visible keyboard focus, reduced-motion behavior, readable responsive tables, semantic navigation, and warning presentation that does not rely on color alone.
 - 2026-07-21 — Required authority, environment, result, and finality distinctions to remain understandable without diagrams or color alone.
+- 2026-07-21 — Required device, enrollment, workspace, financial-authority, capability, and stop-domain distinctions to remain understandable without diagrams alone.
 
 ### Security
 - 2026-07-19 — Documented secret prohibitions, payment-metadata minimization, adapter-substitution and receipt risks, claims controls, workflow least privilege, incident triggers, and evidence-preserving recovery.
 - 2026-07-20 — Documented separation between autonomous-development orchestration, independent financial authorization, adapter credentials, and emergency-disable ownership.
 - 2026-07-20 — Hardened the documentation workflow to check out and assert the submitted pull-request head, isolate deployment permissions, generate a SHA-256 manifest, and retain reviewable source/build evidence.
 - 2026-07-21 — Added threats and required witnesses for financial-approval/capability confusion, identity mismatch, stale quotes, replay, duplicate effects, false finality, privacy leakage, automated budget escalation, correction, revocation, emergency stop, and recovery.
+- 2026-07-21 — Added device-trust/financial-authority confusion, stale enrollment, wrong host, wrong workspace, loss/theft, cached approval, host/financial data commingling, and replacement-device threats.
 
 ### Implementation
-- The repository remains documentation-only; no executable payment schema, accounting engine, credential, custody, signing, adapter, testnet behavior, or production transfer path was added.
+- The repository remains documentation-only; no executable payment schema, accounting engine, credential, custody, signing, adapter, testnet behavior, production transfer path, device inspection, or device-control behavior was added.
 - 2026-07-19 — Pinned MkDocs 1.6.1 and updated the validation workflow to run `mkdocs build --strict` and retain exact-source evidence.
-- 2026-07-21 — No runtime or schema implementation changed; all new contract, route, and fixture material is documentation-only.
+- 2026-07-21 — No runtime or schema implementation changed; all new contract, route, device-binding, and fixture material is documentation-only.
 
 ### Release
-- The documentation candidate remains blocked until charter and portfolio authority decisions, contract ownership, compatibility witnesses, reproducible publication, claims/accessibility/security review, checksums, provenance, and rollback evidence pass.
+- The documentation candidate remains blocked until charter and portfolio authority decisions, device/workspace identity, contract ownership, compatibility witnesses, reproducible publication, claims/accessibility/security review, checksums, provenance, and rollback evidence pass.
 - 2026-07-19 — Documentation content advanced substantially, but no release gate was marked complete and no production capability was inferred.
 - 2026-07-20 — Exact-source and checksum evidence generation became part of the candidate workflow; accepted exact-head results and all human review gates remain required.
 - 2026-07-21 — Expanded release gates to require independent financial-authority ownership, Repository `1` role approval, machine-readable gluing fixtures, finality and correction semantics, and a cross-repository emergency-stop and recovery exercise.
+- 2026-07-21 — Expanded gates to require device identity, enrollment generation, workspace/source identity, wrong-device rejection, loss/replacement behavior, and independent device, financial, and adapter recovery controls.
 
 ### Deployment
-- Pages is the only proposed deployment surface; no credentialed, testnet, or production payment deployment is authorized.
+- Pages is the only proposed deployment surface; no credentialed, testnet, production payment, device-monitoring, or remote-administration deployment is authorized.
 - 2026-07-19 — The Pages source builds into `site/`; publication remains separately governed and does not constitute payment-release approval.
 - 2026-07-20 — Pull-request validation retained read-only permissions and produced review artifacts without publishing.
 - 2026-07-21 — The documentation changes do not authorize Pages publication; the updated exact head requires a fresh accepted validation artifact before review.
