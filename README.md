@@ -6,9 +6,23 @@ Auditable payment-intent, authorization, allocation, receipt, dispute, reconcili
 
 ## A.L.I.S.T.A.I.R.E. role
 
-A.L.I.S.T.A.I.R.E. is the canonical system objective. QSO-PAYMENTS is its bounded **economic-intent and evidence subsystem**: it may document resource needs, proposed budgets, approval requests, allocations, receipts, disputes, and reconciliation states. It is not the autonomous-development control plane and does not grant that control plane financial authority.
+A.L.I.S.T.A.I.R.E. is the canonical system objective. QSO-PAYMENTS is its bounded **economic-intent, allocation-preview, evidence, dispute, and reconciliation subsystem**. It is not Repository `0`, Repository `1`, a financial approver, a credential store, a custodian, or a payment processor.
 
-Autonomous workflows may prepare and verify a resource request. They may not approve their own request, inherit credentials, sign transactions, custody assets, or infer settlement from incomplete evidence. See [A.L.I.S.T.A.I.R.E. integration](docs/ALISTAIRE_INTEGRATION.md).
+The current lowest-coupling route is:
+
+```text
+Repository 0 local resource proposal
+→ QSO-PAYMENTS validated economic intent
+→ QSO-STUDIO or another approved review surface
+→ independent financial authorization
+→ Repository 1 admission and narrow execution capability
+→ disabled external adapter boundary
+→ execution evidence
+→ QSO-PAYMENTS reconciliation
+→ Repository 1 canonical disposition
+```
+
+Repository `0` may propose and verify resource needs but cannot approve or fund them. Repository `1` may become the generic capability and canonical-state authority after approval, but a generic capability cannot substitute for an independent financial authorization. Adapter execution is evidence, not automatic canonical or legal finality.
 
 ## Documentation
 
@@ -16,12 +30,14 @@ Autonomous workflows may prepare and verify a resource request. They may not app
 - [Project guide](docs/PROJECT_GUIDE.md)
 - [Architecture and trust boundaries](docs/ARCHITECTURE.md)
 - [A.L.I.S.T.A.I.R.E. integration](docs/ALISTAIRE_INTEGRATION.md)
+- [Obstruction and gluing analysis](docs/OBSTRUCTION_AND_GLUING.md)
 - [Design contracts](docs/DESIGN_CONTRACTS.md)
 - [Developer onboarding](docs/ONBOARDING.md)
 - [Security and privacy](docs/SECURITY_PRIVACY.md)
 - [Operations and recovery](docs/OPERATIONS.md)
-- [Architecture decisions](docs/decisions/0001-documentation-only-boundary.md)
+- [Architecture decision](docs/decisions/0001-documentation-only-boundary.md)
 - [Task chain](taskchain.md)
+- [Punch list](punchlist.md)
 - [Release plan](release.md)
 - [Changelog](changelog.md)
 
@@ -29,22 +45,23 @@ Autonomous workflows may prepare and verify a resource request. They may not app
 
 ```text
 A.L.I.S.T.A.I.R.E. objective or bounded human/QSO proposal
--> payment intent
--> schema and policy validation
--> independent authorization
--> deterministic allocation and reconciliation
--> disabled external-adapter boundary
--> receipt, failure, unknown, or dispute evidence
+→ payment intent
+→ schema and policy validation
+→ independent financial authorization
+→ narrow capability admission
+→ deterministic allocation and reconciliation
+→ disabled external-adapter boundary
+→ receipt, failure, pending, unknown, reversal, or dispute evidence
 ```
 
-A proposal is not authorization. Authorization is not settlement. A receipt is adapter-reported evidence, not an unconditional claim of finality. Documentation and simulation evidence do not establish production capability.
+A proposal is not authorization. Financial authorization is not a reusable credential. A generic capability is not financial approval. Authorization is not settlement. A receipt is adapter-reported evidence, not an unconditional claim of finality. Documentation and simulation evidence do not establish production capability.
 
 ## Environment model
 
-- **Documentation — current:** concepts, contracts, risks, review procedures, and publication evidence.
+- **Documentation — current:** concepts, contracts, risks, review procedures, gluing requirements, and publication evidence.
 - **Simulation — future approval:** deterministic fictional calculations with no credentials, custody, signing, or external transfers.
-- **Testnet — not authorized:** separately governed non-production integration.
-- **Production — prohibited by current scope:** independently authorized, audited, monitored, and legally reviewed deployment.
+- **Testnet — not authorized:** separately governed non-production integration with explicit human approval and isolated credentials.
+- **Production — prohibited by current scope:** independently authorized, audited, monitored, legally reviewed deployment with tested emergency stop and recovery.
 
 Only the documentation environment is currently in release scope.
 
@@ -57,14 +74,16 @@ python -m pip install -r requirements-docs.txt
 mkdocs build --strict
 ```
 
-The Pages workflow builds the pinned MkDocs site on documentation pull requests and deploys the generated `site/` artifact only from `main`. Pull-request builds assert the submitted head commit, generate a SHA-256 manifest, and retain a review artifact. A successful build is verification input, not release approval; the exact workflow run, artifact, checksums, accessibility review, claims review, security/privacy review, provenance, and rollback record must be retained for one immutable candidate commit.
+The validation workflow builds the pinned MkDocs site, asserts the submitted source identity, checks generated-site boundaries, produces SHA-256 evidence, and retains review artifacts. It does not publish Pages, activate adapters, or approve a release. A successful build is verification input only.
 
 ## Safety boundary
 
-- QSOs and autonomous-development workflows may produce bounded, reviewable payment intents; they cannot approve their own intents.
-- External adapters remain disabled until separately authorized, tested, audited, and operationally governed.
-- Credentials, private keys, and sensitive account identifiers must not appear in repository records, fixtures, logs, or public artifacts.
-- Allocation totals must reconcile under explicit fixed-precision, rounding, and remainder rules or fail closed.
-- Retries require idempotency and cannot duplicate a previously accepted route.
-- Missing or contradictory evidence remains unresolved instead of being represented as successful settlement.
-- No documentation page constitutes a financial product, custody service, settlement service, legal certification, or promise of returns.
+- QSOs and Repository `0` workflows may produce bounded, reviewable payment intents; they cannot approve their own intents.
+- Repository `1` cannot invent financial approval or broaden an accepted amount, destination, environment, duration, or adapter scope.
+- External adapters remain disabled until separately authorized, tested, audited, legally reviewed, and operationally governed.
+- Credentials, private keys, complete account identifiers, and sensitive payment data must not appear in repository records, fixtures, logs, model context, or public artifacts.
+- Allocation totals must reconcile under explicit fixed-precision, rounding, fee, tax, and remainder rules or fail closed.
+- Retries require shared idempotency and replay domains and cannot duplicate a previously accepted route.
+- Missing, stale, contradictory, partial, or unverifiable evidence remains `PENDING`, `UNKNOWN`, `DISPUTED`, or another explicit non-success state.
+- Revocation, correction, emergency stop, evidence preservation, cache invalidation, and bounded recovery must work across every participating repository.
+- No documentation page constitutes a financial product, custody service, settlement service, legal certification, suitability determination, or promise of returns.
