@@ -8,11 +8,13 @@ This checklist records evidence for the documentation-only candidate. A checked 
 - [ ] Canonical terminology and status vocabulary approved
 - [ ] Jurisdictional, regulatory, tax, and licensing assumptions approved or explicitly deferred with limits
 - [ ] QSO-PAYMENTS role as A.L.I.S.T.A.I.R.E.'s bounded economic-intent, evidence, dispute, and reconciliation subsystem approved
-- [ ] Repository `0` resource-proposal role approved
-- [ ] Repository `1` generic capability/canonical-state role approved or replaced
+- [ ] Repository `0` resource-proposal and portable-host observation role approved
+- [ ] Repository `1` device-enrollment, generic capability, and canonical-state role approved or replaced
+- [ ] Device identity, ownership scope, enrollment generation, replacement, retirement, and revocation owner designated
+- [ ] Workspace, repository, base-commit, and expected-head identity method approved
 - [ ] Independent financial authorizer and revoker designated
 - [ ] Adapter credential, signing, custody, monitoring, and incident owners designated
-- [ ] Portfolio-wide emergency-stop, correction, revocation, recovery, and rollback owners designated
+- [ ] Device stop, financial stop, adapter stop, portfolio freeze, recovery, and rollback owners designated
 - [ ] Shared schema/package and identity-namespace owner approved
 - [ ] Data classification, privacy, retention, disclosure, and deletion model approved
 - [ ] Documentation, simulation, testnet, and production labels and transitions approved
@@ -23,22 +25,28 @@ Evidence: _pending_
 
 ## P1 — Obstruction and gluing approval
 
+- [ ] Device enrollment is distinct from financial approval
+- [ ] Device trust is distinct from workspace/repository authority
 - [ ] Financial approval is distinct from generic capability issuance
 - [ ] Resource proposal is distinct from validated payment intent
 - [ ] Financial authorization is distinct from an execution credential
 - [ ] Adapter execution is distinct from receipt validation, reconciliation, canonical acceptance, and legal finality
 - [ ] Repository `0` → QSO-PAYMENTS → review → financial authority → Repository `1` route approved
-- [ ] Intent, authorization, capability, receipt, dispute, reconciliation, correction, and revocation schema ownership approved
-- [ ] Requester, beneficiary, payee, destination, device, environment, and adapter identity namespaces approved
+- [ ] Device/workspace binding policy is approved for every execution-capable environment
+- [ ] Wrong-device, wrong-enrollment-generation, wrong-workspace, wrong-head, wrong-adapter, and wrong-environment use fails closed
+- [ ] Lost, stolen, revoked, retired, and replacement-device lifecycle approved
+- [ ] Intent, authorization, capability, receipt, dispute, reconciliation, correction, revocation, device, workspace, and recovery schema ownership approved
+- [ ] Requester, beneficiary, payee, destination, device, environment, workspace, and adapter identity namespaces approved
 - [ ] Environment transition state machine approved
 - [ ] Currency, unit, fixed precision, rounding, fee, tax, and remainder semantics approved
 - [ ] Quote source, valuation time, freshness, and exchange-rate rules approved
 - [ ] Shared idempotency, nonce, retry, replay, and duplicate domains approved
 - [ ] Finality, pending, failure, unknown, dispute, reversal, and reconciliation semantics approved
 - [ ] Correction, supersession, cache invalidation, and downstream notification rules approved
-- [ ] All eight pairwise contract edges reviewed
-- [ ] All six triple-overlap witness groups approved
-- [ ] The 18 active obstructions are resolved, explicitly deferred, or accepted with bounded risk
+- [ ] Three independent stop domains—device, financial, and adapter—approved
+- [ ] All pairwise contract edges reviewed
+- [ ] All triple-overlap witness groups approved
+- [ ] Active obstructions are resolved, explicitly deferred, or accepted with bounded risk
 
 Evidence: _pending_
 
@@ -49,13 +57,15 @@ Evidence: _pending_
 - [ ] Canonical serialization and signature scope are defined
 - [ ] Identical positive fixtures pass in all participating repositories
 - [ ] Malformed, unsupported-version, stale, replayed, wrong-identity, and expected-head mismatch fixtures fail closed
+- [ ] Wrong-device, revoked-device, stale-enrollment, wrong-workspace, and replacement-device fixtures fail closed
 - [ ] Over-limit, wrong-destination, wrong-environment, expired, and revoked authorization fixtures fail closed
 - [ ] Idempotency and duplicate-suppression fixtures prevent repeated effects
 - [ ] Fixed-precision allocation and reconciliation golden vectors pass
 - [ ] Quote freshness and exchange-rate evidence fixtures pass
 - [ ] Partial failure, timeout, retry, reversal, refund, dispute, and compensation fixtures pass
-- [ ] Adapter evidence preserves raw hashes, redaction declarations, uncertainty, and correction routes
-- [ ] Revocation and emergency-stop propagation invalidates downstream use
+- [ ] Adapter evidence preserves raw hashes, redaction declarations, uncertainty, device identity, workspace identity, and correction routes
+- [ ] Device, financial, and adapter revocation propagation invalidates downstream use and cached review state
+- [ ] Lost-device and replacement-device fixtures preserve evidence and require fresh admissible bindings
 - [ ] Recovery restores a bounded state without deleting incident evidence
 
 Evidence: _pending; executable schemas and fixtures require separate approval_
@@ -75,7 +85,7 @@ Evidence: _pending; executable schemas and fixtures require separate approval_
 - [ ] Source-identity record retained
 - [ ] SHA-256 manifest retained
 - [ ] Provenance record retained
-- [ ] Generated output contains no credentials, account data, or deployment secrets
+- [ ] Generated output contains no credentials, account data, device identifiers, network inventories, authorization records, or deployment secrets
 
 Evidence: _pending accepted exact-head result after the current documentation changes_
 
@@ -83,11 +93,13 @@ Evidence: _pending accepted exact-head result after the current documentation ch
 
 - [ ] Purpose and non-goals are consistent across README, Pages, task chain, punch list, release plan, and changelog
 - [ ] A.L.I.S.T.A.I.R.E. objective and QSO-PAYMENTS subsystem role are consistent
-- [ ] Repository `0`, Repository `1`, financial authorization, and adapter roles are distinct
+- [ ] Repository `0`, Repository `1`, financial authorization, device trust, workspace identity, and adapter roles are distinct
 - [ ] Intent, validation, authorization, capability, allocation, adapter submission, receipt, reconciliation, dispute, custody, and settlement are distinct
-- [ ] Every capability claim has an environment label
+- [ ] Device enrollment is never described as financial permission
+- [ ] Financial authorization is never described as general device or repository authority
+- [ ] Every capability claim has an environment, device, and workspace binding or explicitly states that no executable capability exists
 - [ ] No custody, signing, settlement-service, investment, certification, suitability, or return promise is implied
-- [ ] No QSO, genome, repository, task, interface, successful workflow, or transported record is represented as financial authority
+- [ ] No QSO, genome, repository, task, interface, trusted device, successful workflow, or transported record is represented as financial authority
 - [ ] Finality, pending, unknown, reversal, and dispute limitations are visible
 - [ ] Repository dependency descriptions do not transfer authority
 - [ ] Architecture and gluing documents received human review
@@ -103,22 +115,26 @@ Evidence: _pending_
 - [ ] Contrast reviewed
 - [ ] 200% and 400% zoom reviewed
 - [ ] Reduced-motion preference respected
-- [ ] Warnings, authority states, environments, and result states do not rely on color alone
-- [ ] Authority and environment distinctions are understandable without diagrams alone
+- [ ] Warnings, authority states, environments, device states, and result states do not rely on color alone
+- [ ] Authority, device, workspace, environment, and finality distinctions are understandable without diagrams alone
 
 Evidence: _pending_
 
 ## Security, privacy, and financial safety
 
 - [ ] Source and build output scanned for secrets
-- [ ] Source and build output inspected for personal or financial data
+- [ ] Source and build output inspected for personal, device, network, or financial data
 - [ ] External links and remote content reviewed
 - [ ] Workflow and supply-chain risks reviewed
 - [ ] Pull-request jobs have no Pages deployment or token-minting authority
 - [ ] Self-approval and cross-repository authority-confusion threats reviewed
+- [ ] Device-trust versus financial-approval confusion reviewed
+- [ ] Workspace/repository authority versus device ownership confusion reviewed
 - [ ] Generic capability versus financial approval confusion reviewed
+- [ ] Wrong-device, stale-enrollment, lost-device, replacement-device, and cached-approval threats reviewed
 - [ ] Adapter substitution, replay, duplicate effect, receipt forgery, and false finality threats reviewed
-- [ ] Credential, signing, custody, key rotation, and revocation topology independently reviewed
+- [ ] Credential, signing, custody, key rotation, device binding, and revocation topology independently reviewed
+- [ ] Host evidence and financial evidence remain separately minimized and governed
 - [ ] Data minimization, tokenization, redaction, retention, and publication rules reviewed
 - [ ] Automated budget-escalation and self-funding loops reviewed
 - [ ] Incident contacts, containment authority, independent emergency disable, and recovery order recorded
@@ -133,6 +149,7 @@ Evidence: _pending_
 - [ ] Post-deployment navigation and claims check passed
 - [ ] Prior verified artifact identified
 - [ ] Documentation rollback procedure exercised or credibly demonstrated
+- [ ] Device loss/theft, financial revocation, adapter disable, and replacement-device tabletop completed before any executable environment
 - [ ] Financial-route emergency-stop and recovery tabletop completed before any executable environment
 - [ ] Recovery evidence retained
 - [ ] Unresolved findings recorded
@@ -144,13 +161,15 @@ Evidence: _pending_
 - [ ] Documentation reviewer approved
 - [ ] Architecture reviewer approved
 - [ ] Contract/gluing reviewer approved
+- [ ] Portable device-trust reviewer approved
 - [ ] Security and privacy reviewers approved
 - [ ] Accessibility reviewer approved
 - [ ] Claims/legal reviewer approved where required
 - [ ] Financial authority owner approved the separation-of-duties model
+- [ ] Device-enrollment authority approved device/workspace bindings and replacement behavior
 - [ ] A.L.I.S.T.A.I.R.E. portfolio authority approved subsystem placement
 - [ ] Release owner approved publication
 
 Decision: `BLOCKED`
 
-Reason: Charter, financial-authority, schema ownership, compatibility witnesses, exact-head review evidence, publication approval, and recovery ownership remain pending. No simulation, testnet, adapter, or production work is authorized.
+Reason: Charter, financial-authority, device/workspace identity, schema ownership, compatibility witnesses, exact-head review evidence, publication approval, and recovery ownership remain pending. No simulation, testnet, adapter, device-control, or production payment work is authorized.
