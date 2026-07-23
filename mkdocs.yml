@@ -21,7 +21,9 @@ nav:
   - Portable trust and financial authority: PORTABLE_TRUST_FINANCIAL_BOUNDARY.md
   - Obstruction and gluing analysis: OBSTRUCTION_AND_GLUING.md
   - Design contracts: DESIGN_CONTRACTS.md
+  - Contract and interface reference: CONTRACT_REFERENCE.md
   - Developer onboarding: ONBOARDING.md
+  - Accessibility and plain-language review: ACCESSIBILITY_REVIEW.md
   - Security and privacy: SECURITY_PRIVACY.md
   - Operations and recovery: OPERATIONS.md
   - Decisions:
