@@ -2,7 +2,7 @@
 
 **Auditable economic intent without uncontrolled custody.**
 
-QSO-PAYMENTS is A.L.I.S.T.A.I.R.E.'s bounded economic-intent, allocation-preview, evidence, dispute, and reconciliation subsystem. It documents the boundary between a resource proposal and any external system that could move assets. The current release surface is documentation only: it defines responsibilities, records, evidence, compatibility witnesses, and review gates without providing custody, signing, credentials, testnet execution, production settlement, investment products, or guaranteed returns.
+QSO-PAYMENTS is A.L.I.S.T.A.I.R.E.'s bounded economic-intent, allocation-preview, evidence, dispute, and reconciliation subsystem. It documents the boundary between a resource proposal and any external system that could move assets. The current release surface is documentation only: it defines responsibilities, records, evidence, compatibility witnesses, accessibility requirements, and review gates without providing custody, signing, credentials, testnet execution, production settlement, investment products, or guaranteed returns.
 
 !!! warning "Current maturity"
     This repository is a charter and contract-design candidate. Documentation may explain a future interface, but it does not establish that the interface exists, is authorized, is financially approved, or is suitable for production use.
@@ -13,7 +13,7 @@ Repository `0` may identify a resource need, prepare a bounded local proposal, c
 
 An independent human or separately approved financial authority must issue an attributable financial authorization. Repository `1` may later admit and record a narrower execution capability after verifying that authorization, but a generic capability cannot substitute for financial approval. External adapters remain disabled.
 
-See [A.L.I.S.T.A.I.R.E. integration](ALISTAIRE_INTEGRATION.md) and the [obstruction and gluing analysis](OBSTRUCTION_AND_GLUING.md).
+See [A.L.I.S.T.A.I.R.E. integration](ALISTAIRE_INTEGRATION.md), the [contract and interface reference](CONTRACT_REFERENCE.md), and the [obstruction and gluing analysis](OBSTRUCTION_AND_GLUING.md).
 
 ## Authority model
 
@@ -31,13 +31,15 @@ flowchart LR
     C --> D["Repository 1 canonical disposition"]
 ```
 
+**Equivalent prose:** Repository `0` may create a local resource proposal, which QSO-PAYMENTS may convert into a validated economic intent. An approved review surface presents that intent to an independent financial authority. Only after independent authorization may Repository `1` admit a narrower technical capability. The external adapter gate remains disabled by default and can reach an external system only through a separately approved environment. Held, simulated, failed, pending, partial, or unknown evidence returns to QSO-PAYMENTS for reconciliation before Repository `1` or an approved successor records a canonical disposition. No step inherits the authority of the step before it.
+
 A proposal is not validation. Validation is not financial approval. Financial approval is not a reusable credential. A capability is not approval. Adapter execution is not canonical acceptance or legal finality. Reconciliation preserves uncertainty and correction history.
 
 ## Current product boundary
 
 | Area | Current status | Meaning |
 |---|---|---|
-| Documentation | In scope | Architecture, terminology, trust boundaries, gluing contracts, review procedures, and release evidence |
+| Documentation | In scope | Architecture, terminology, trust boundaries, gluing contracts, accessible status semantics, review procedures, and release evidence |
 | Simulation | Not yet approved | Future deterministic calculations using fictional values and no external credentials |
 | Testnet | Not authorized | Requires separate schemas, isolated credentials, legal/security/privacy review, monitoring, emergency stop, and human approval |
 | Production | Prohibited by current scope | Cannot be inferred from schemas, fixtures, documentation, simulation, or testnet activity |
@@ -54,6 +56,7 @@ A proposal is not validation. Validation is not financial approval. Financial ap
 8. Pending, unknown, contradictory, reversed, disputed, or unresolved status is preserved rather than presented as successful settlement.
 9. Repository, QSO, genome, task, interface, workflow, or transported-message identity never implies financial capability.
 10. Revocation, correction, emergency stop, evidence preservation, cache invalidation, and bounded recovery must glue across every participating component.
+11. Status, authority, environment, and finality distinctions must be expressed in text and remain understandable without color or diagrams.
 
 ## Material obstruction
 
@@ -64,9 +67,12 @@ The portfolio has not yet adopted one jointly versioned contract separating inde
 - [Project guide](PROJECT_GUIDE.md): purpose, terminology, contract families, threats, and release gates.
 - [Architecture](ARCHITECTURE.md): trust boundaries, lifecycle, data classes, dependencies, and verification strategy.
 - [A.L.I.S.T.A.I.R.E. integration](ALISTAIRE_INTEGRATION.md): subsystem role, portfolio interfaces, authority matrix, autonomous-evolution limits, and ownership decisions.
+- [Portable trust and financial authority](PORTABLE_TRUST_FINANCIAL_BOUNDARY.md): device/workspace bindings, independent financial approval, revocation, stop domains, and recovery.
 - [Obstruction and gluing analysis](OBSTRUCTION_AND_GLUING.md): active compatibility failures, pairwise contracts, triple-overlap witnesses, result semantics, and acceptance order.
 - [Design contracts](DESIGN_CONTRACTS.md): proposed record semantics, invariants, failure modes, and compatibility rules.
+- [Contract and interface reference](CONTRACT_REFERENCE.md): conceptual interface surfaces, record families, envelope, statuses, reason codes, examples, migration, and authority limits.
 - [Developer onboarding](ONBOARDING.md): local documentation setup, contribution workflow, and review checklist.
+- [Accessibility and plain-language review](ACCESSIBILITY_REVIEW.md): text-equivalent status semantics, diagram alternatives, navigation, keyboard, zoom, and comprehension review.
 - [Security and privacy](SECURITY_PRIVACY.md): threat model, data minimization, secret handling, and claims controls.
 - [Operations and recovery](OPERATIONS.md): evidence retention, incident response, emergency disable, recovery, and rollback.
 - [ADR-0001](decisions/0001-documentation-only-boundary.md): why the first release is documentation-only.
