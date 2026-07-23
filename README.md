@@ -30,9 +30,12 @@ Repository `0` may propose and verify resource needs but cannot approve or fund 
 - [Project guide](docs/PROJECT_GUIDE.md)
 - [Architecture and trust boundaries](docs/ARCHITECTURE.md)
 - [A.L.I.S.T.A.I.R.E. integration](docs/ALISTAIRE_INTEGRATION.md)
+- [Portable trust and financial authority](docs/PORTABLE_TRUST_FINANCIAL_BOUNDARY.md)
 - [Obstruction and gluing analysis](docs/OBSTRUCTION_AND_GLUING.md)
 - [Design contracts](docs/DESIGN_CONTRACTS.md)
+- [Contract and interface reference](docs/CONTRACT_REFERENCE.md)
 - [Developer onboarding](docs/ONBOARDING.md)
+- [Accessibility and plain-language review](docs/ACCESSIBILITY_REVIEW.md)
 - [Security and privacy](docs/SECURITY_PRIVACY.md)
 - [Operations and recovery](docs/OPERATIONS.md)
 - [Architecture decision](docs/decisions/0001-documentation-only-boundary.md)
@@ -58,7 +61,7 @@ A proposal is not authorization. Financial authorization is not a reusable crede
 
 ## Environment model
 
-- **Documentation — current:** concepts, contracts, risks, review procedures, gluing requirements, and publication evidence.
+- **Documentation — current:** concepts, contracts, risks, review procedures, gluing requirements, accessibility requirements, and publication evidence.
 - **Simulation — future approval:** deterministic fictional calculations with no credentials, custody, signing, or external transfers.
 - **Testnet — not authorized:** separately governed non-production integration with explicit human approval and isolated credentials.
 - **Production — prohibited by current scope:** independently authorized, audited, monitored, legally reviewed deployment with tested emergency stop and recovery.
@@ -86,4 +89,5 @@ The validation workflow builds the pinned MkDocs site, asserts the submitted sou
 - Retries require shared idempotency and replay domains and cannot duplicate a previously accepted route.
 - Missing, stale, contradictory, partial, or unverifiable evidence remains `PENDING`, `UNKNOWN`, `DISPUTED`, or another explicit non-success state.
 - Revocation, correction, emergency stop, evidence preservation, cache invalidation, and bounded recovery must work across every participating repository.
+- Status, authority, environment, and finality distinctions must remain understandable without color, diagrams, or portfolio-specific shorthand.
 - No documentation page constitutes a financial product, custody service, settlement service, legal certification, suitability determination, or promise of returns.
