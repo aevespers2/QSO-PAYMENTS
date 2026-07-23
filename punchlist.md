@@ -15,7 +15,7 @@ This checklist records evidence for the documentation-only candidate. A checked 
 - [ ] Independent financial authorizer and revoker designated
 - [ ] Adapter credential, signing, custody, monitoring, and incident owners designated
 - [ ] Device stop, financial stop, adapter stop, portfolio freeze, recovery, and rollback owners designated
-- [ ] Shared schema/package and identity-namespace owner approved
+- [ ] Shared schema/package, status/reason-code, and identity-namespace owner approved
 - [ ] Data classification, privacy, retention, disclosure, and deletion model approved
 - [ ] Documentation, simulation, testnet, and production labels and transitions approved
 - [ ] Prohibited capabilities, self-authorization rules, and claims approved
@@ -35,7 +35,7 @@ Evidence: _pending_
 - [ ] Device/workspace binding policy is approved for every execution-capable environment
 - [ ] Wrong-device, wrong-enrollment-generation, wrong-workspace, wrong-head, wrong-adapter, and wrong-environment use fails closed
 - [ ] Lost, stolen, revoked, retired, and replacement-device lifecycle approved
-- [ ] Intent, authorization, capability, receipt, dispute, reconciliation, correction, revocation, device, workspace, and recovery schema ownership approved
+- [ ] Intent, authorization, capability, receipt, dispute, reconciliation, correction, revocation, device, workspace, status, reason-code, and recovery schema ownership approved
 - [ ] Requester, beneficiary, payee, destination, device, environment, workspace, and adapter identity namespaces approved
 - [ ] Environment transition state machine approved
 - [ ] Currency, unit, fixed precision, rounding, fee, tax, and remainder semantics approved
@@ -50,11 +50,25 @@ Evidence: _pending_
 
 Evidence: _pending_
 
+## P1A — Conceptual contract and interface review
+
+- [ ] Interface surfaces identify producer, consumer, boundary, and current disposition
+- [ ] Common envelope semantics distinguish profile, record, context, provenance, classification, and payload
+- [ ] Proposal, intent, validation, financial authorization, allocation, capability, adapter submission, adapter evidence, reconciliation, and dispute records remain distinct
+- [ ] Status labels have one explicit meaning and one or more prohibited interpretations
+- [ ] Unknown statuses and reason codes fail closed
+- [ ] Examples are visibly synthetic and non-executable
+- [ ] Compatibility and migration requirements preserve source lineage, unsupported fields, consumer closure, and rollback
+- [ ] Contract reference is reviewed without being represented as an approved schema or API
+
+Evidence: _pending_
+
 ## P2 — Machine-readable compatibility evidence
 
 - [ ] Canonical schemas are published from the approved owner repository
 - [ ] Every schema has an immutable version and compatibility policy
 - [ ] Canonical serialization and signature scope are defined
+- [ ] Status and reason-code registries are closed, versioned, and independently reviewed
 - [ ] Identical positive fixtures pass in all participating repositories
 - [ ] Malformed, unsupported-version, stale, replayed, wrong-identity, and expected-head mismatch fixtures fail closed
 - [ ] Wrong-device, revoked-device, stale-enrollment, wrong-workspace, and replacement-device fixtures fail closed
@@ -78,6 +92,7 @@ Evidence: _pending; executable schemas and fixtures require separate approval_
 - [ ] `python -m pip install -r requirements-docs.txt` passed
 - [ ] `mkdocs build --strict` passed
 - [ ] Required files and local links validated
+- [ ] Contract and accessibility guides appear in rendered navigation
 - [ ] Workflow permissions reviewed
 - [ ] Action and dependency versions recorded
 - [ ] Source archive retained
@@ -101,8 +116,9 @@ Evidence: _pending accepted exact-head result after the current documentation ch
 - [ ] No custody, signing, settlement-service, investment, certification, suitability, or return promise is implied
 - [ ] No QSO, genome, repository, task, interface, trusted device, successful workflow, or transported record is represented as financial authority
 - [ ] Finality, pending, unknown, reversal, and dispute limitations are visible
+- [ ] Status and reason-code examples do not imply executable contract acceptance
 - [ ] Repository dependency descriptions do not transfer authority
-- [ ] Architecture and gluing documents received human review
+- [ ] Architecture, contract-reference, accessibility, and gluing documents received human review
 
 Evidence: _pending_
 
@@ -117,6 +133,9 @@ Evidence: _pending_
 - [ ] Reduced-motion preference respected
 - [ ] Warnings, authority states, environments, device states, and result states do not rely on color alone
 - [ ] Authority, device, workspace, environment, and finality distinctions are understandable without diagrams alone
+- [ ] Every meaningful diagram has equivalent prose
+- [ ] Every example is labeled illustrative, synthetic, or executable
+- [ ] A reader unfamiliar with the portfolio can identify proposer, validator, authorizer, capability issuer, adapter, reconciler, correction/revocation owner, and unresolved state
 
 Evidence: _pending_
 
@@ -136,6 +155,7 @@ Evidence: _pending_
 - [ ] Credential, signing, custody, key rotation, device binding, and revocation topology independently reviewed
 - [ ] Host evidence and financial evidence remain separately minimized and governed
 - [ ] Data minimization, tokenization, redaction, retention, and publication rules reviewed
+- [ ] Public examples contain no credentials, complete account identifiers, private device identifiers, or production transaction references
 - [ ] Automated budget-escalation and self-funding loops reviewed
 - [ ] Incident contacts, containment authority, independent emergency disable, and recovery order recorded
 
@@ -149,6 +169,7 @@ Evidence: _pending_
 - [ ] Post-deployment navigation and claims check passed
 - [ ] Prior verified artifact identified
 - [ ] Documentation rollback procedure exercised or credibly demonstrated
+- [ ] Correction or withdrawal updates every controlled documentation route
 - [ ] Device loss/theft, financial revocation, adapter disable, and replacement-device tabletop completed before any executable environment
 - [ ] Financial-route emergency-stop and recovery tabletop completed before any executable environment
 - [ ] Recovery evidence retained
@@ -161,9 +182,10 @@ Evidence: _pending_
 - [ ] Documentation reviewer approved
 - [ ] Architecture reviewer approved
 - [ ] Contract/gluing reviewer approved
+- [ ] Contract-reference reviewer approved the conceptual semantics without treating them as an executable API
 - [ ] Portable device-trust reviewer approved
 - [ ] Security and privacy reviewers approved
-- [ ] Accessibility reviewer approved
+- [ ] Accessibility reviewer approved the rendered artifact
 - [ ] Claims/legal reviewer approved where required
 - [ ] Financial authority owner approved the separation-of-duties model
 - [ ] Device-enrollment authority approved device/workspace bindings and replacement behavior
@@ -172,4 +194,4 @@ Evidence: _pending_
 
 Decision: `BLOCKED`
 
-Reason: Charter, financial-authority, device/workspace identity, schema ownership, compatibility witnesses, exact-head review evidence, publication approval, and recovery ownership remain pending. No simulation, testnet, adapter, device-control, or production payment work is authorized.
+Reason: Charter, financial-authority, device/workspace identity, schema/status/reason-code ownership, compatibility witnesses, exact-head review evidence, rendered accessibility review, publication approval, and recovery ownership remain pending. No simulation, testnet, adapter, device-control, or production payment work is authorized.
