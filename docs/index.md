@@ -13,7 +13,7 @@ Repository `0` may identify a resource need, prepare a bounded local proposal, c
 
 An independent human or separately approved financial authority must issue an attributable financial authorization. Repository `1` may later admit and record a narrower execution capability after verifying that authorization, but a generic capability cannot substitute for financial approval. External adapters remain disabled.
 
-See [A.L.I.S.T.A.I.R.E. integration](ALISTAIRE_INTEGRATION.md), the [contract and interface reference](CONTRACT_REFERENCE.md), the [independent financial authorization review guide](FINANCIAL_AUTHORIZATION_REVIEW.md), the [status, finality, and correction lifecycle](STATUS_FINALITY_LIFECYCLE.md), and the [obstruction and gluing analysis](OBSTRUCTION_AND_GLUING.md).
+See [A.L.I.S.T.A.I.R.E. integration](ALISTAIRE_INTEGRATION.md), the [contract and interface reference](CONTRACT_REFERENCE.md), the [consumer integration and conformance guide](CONSUMER_INTEGRATION_GUIDE.md), the [independent financial authorization review guide](FINANCIAL_AUTHORIZATION_REVIEW.md), the [status, finality, and correction lifecycle](STATUS_FINALITY_LIFECYCLE.md), and the [obstruction and gluing analysis](OBSTRUCTION_AND_GLUING.md).
 
 ## Authority model
 
@@ -49,7 +49,7 @@ A completed processing stage is not authorization. An authorization is not a cre
 
 | Area | Current status | Meaning |
 |---|---|---|
-| Documentation | In scope | Architecture, terminology, trust boundaries, gluing contracts, accessible status semantics, authorization-review procedure, lifecycle/finality distinctions, and release evidence |
+| Documentation | In scope | Architecture, terminology, trust boundaries, gluing contracts, accessible status semantics, authorization-review procedure, lifecycle/finality distinctions, consumer integration guidance, and release evidence |
 | Simulation | Not yet approved | Future deterministic calculations using fictional values and no external credentials |
 | Testnet | Not authorized | Requires separate schemas, isolated credentials, legal/security/privacy review, monitoring, emergency stop, and human approval |
 | Production | Prohibited by current scope | Cannot be inferred from schemas, fixtures, documentation, simulation, or testnet activity |
@@ -70,10 +70,11 @@ A completed processing stage is not authorization. An authorization is not a cre
 12. Status, authority, environment, and finality distinctions must be expressed in text and remain understandable without color or diagrams.
 13. `COMPLETED`, `AUTHORIZED`, `ADAPTER_REPORTED`, `RECONCILED`, `CANONICALLY_ACCEPTED`, and legal finality are distinct claims with separate owners and evidence requirements.
 14. Corrections, revocations, reversals, disputes, and superseding records never delete or silently rewrite the prior generation.
+15. Consumer-local projections must declare accepted profiles, record families, environments, status dimensions, correction routes, privacy rules, and rollback generations; parsing success cannot create compatibility or authority.
 
 ## Material obstruction
 
-The portfolio has not yet adopted one jointly versioned contract separating independent financial approval from Repository `1` capability admission. It also lacks an approved independent authorizer, authority-source model, exact review-record profile, canonical multi-dimensional status registry, transition owner, consumer-notification topology, and correction/revocation owner. Without those boundaries, a technical permission or complete review form could be misrepresented as authority to spend, or adapter success could be misrepresented as final settlement. The [obstruction and gluing analysis](OBSTRUCTION_AND_GLUING.md) records 18 active incompatibilities and the pairwise and triple-overlap witnesses required to resolve them.
+The portfolio has not yet adopted one jointly versioned contract separating independent financial approval from Repository `1` capability admission. It also lacks an approved independent authorizer, authority-source model, exact review-record profile, canonical multi-dimensional status registry, transition owner, consumer-notification topology, correction/revocation owner, and accepted consumer-registration contract. Without those boundaries, a technical permission or complete review form could be misrepresented as authority to spend, adapter success could be misrepresented as final settlement, or a consumer could silently reinterpret unsupported records. The [obstruction and gluing analysis](OBSTRUCTION_AND_GLUING.md) records 18 active incompatibilities and the pairwise and triple-overlap witnesses required to resolve them.
 
 ## Documentation map
 
@@ -84,6 +85,7 @@ The portfolio has not yet adopted one jointly versioned contract separating inde
 - [Obstruction and gluing analysis](OBSTRUCTION_AND_GLUING.md): active compatibility failures, pairwise contracts, triple-overlap witnesses, result semantics, and acceptance order.
 - [Design contracts](DESIGN_CONTRACTS.md): proposed record semantics, invariants, failure modes, and compatibility rules.
 - [Contract and interface reference](CONTRACT_REFERENCE.md): conceptual interface surfaces, record families, envelope, statuses, reason codes, examples, migration, and authority limits.
+- [Consumer integration and conformance](CONSUMER_INTEGRATION_GUIDE.md): consumer declarations, safe read path, status-preserving projections, retry and unknown-outcome behavior, correction/revocation subscriptions, conformance fixtures, accessibility, and rollback.
 - [Independent financial authorization review](FINANCIAL_AUTHORIZATION_REVIEW.md): role separation, decision states, exact bindings, evidence package, fail-closed stops, correction and revocation, gluing witnesses, and reviewer onboarding.
 - [Status, finality, and correction lifecycle](STATUS_FINALITY_LIFECYCLE.md): three-dimensional status semantics, transition constraints, partial/unknown outcomes, correction closure, accessible rendering, and reviewer onboarding.
 - [Developer onboarding](ONBOARDING.md): local documentation setup, contribution workflow, and review checklist.
@@ -94,4 +96,4 @@ The portfolio has not yet adopted one jointly versioned contract separating inde
 
 ## Release posture
 
-The release remains blocked until the payment charter, financial authority, Repository `1` role, contract owner, identity namespaces, status and transition ownership, compatibility witnesses, privacy and retention model, and recovery owners are approved. The current exact head must also pass reproducible strict documentation validation, financial-authorization-record review, lifecycle/finality review, accessibility and claims review, independent security/privacy review, checksum and provenance retention, separately authorized publication verification, and rollback evidence. See the repository [task chain](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/taskchain.md), [punch list](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/punchlist.md), [release plan](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/release.md), and [changelog](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/changelog.md).
+The release remains blocked until the payment charter, financial authority, Repository `1` role, contract owner, identity namespaces, status and transition ownership, consumer registration, compatibility witnesses, privacy and retention model, and recovery owners are approved. The current exact head must also pass reproducible strict documentation validation, financial-authorization-record review, lifecycle/finality review, consumer-integration conformance review, accessibility and claims review, independent security/privacy review, checksum and provenance retention, separately authorized publication verification, and rollback evidence. See the repository [task chain](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/taskchain.md), [punch list](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/punchlist.md), [release plan](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/release.md), and [changelog](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/changelog.md).
