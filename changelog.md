@@ -9,6 +9,7 @@
 - 2026-07-21 — Refined the subsystem role to economic intent, allocation preview, evidence, dispute, and reconciliation; preserved financial approval, capability issuance, custody, and settlement as independent responsibilities.
 - 2026-07-21 — Added the portable device-trust boundary so a known, enrolled, or baseline-compliant device cannot be represented as financially authorized.
 - 2026-07-23 — Added a conceptual contract and interface reference plus an accessibility/plain-language review surface without creating an executable API, financial authority, or publication approval.
+- 2026-07-23 — Added an independent financial-authorization review protocol while retaining `DOCUMENTED_NOT_AUTHORIZED` as the governing state.
 
 ### Architecture
 - Intent and policy remain separate from authorization, capability admission, custody, adapter execution, reconciliation, canonical disposition, and settlement; future adapters are disabled and out of the first release.
@@ -24,6 +25,7 @@
 - 2026-07-21 — Added wrong-device and wrong-workspace rejection, lost/stolen/revoked/replacement-device behavior, and independent device, financial, and adapter stop domains.
 - 2026-07-21 — Added pairwise and triple-overlap witnesses joining Repositories `0` and `1`, QSO-PAYMENTS, review surfaces, adapters, incident authority, and recovery without authority promotion.
 - 2026-07-23 — Added a closed conceptual map of interface surfaces, record families, envelope semantics, status meanings, candidate reason-code classes, compatibility requirements, and migration constraints while keeping schema ownership unresolved.
+- 2026-07-23 — Added explicit authorization-review states, exact intent and scope bindings, conflict-of-interest and material-change rules, fail-closed stop conditions, correction/revocation propagation, and consumer acknowledgment requirements.
 
 ### Documentation
 - 2026-07-19 — Added a project guide and architecture reference covering purpose, onboarding, contract families, threat model, release gates, and rollback boundaries.
@@ -33,12 +35,14 @@
 - 2026-07-21 — Added the obstruction and gluing page to MkDocs navigation and aligned README, task chain, punch list, release plan, and changelog with the current Repository `0`/`1` portfolio model.
 - 2026-07-21 — Added the Portable Trust and Financial Authority Boundary to Pages navigation and aligned task, release, and review gates with device/workspace bindings, privacy separation, revocation, and recovery.
 - 2026-07-23 — Added `docs/CONTRACT_REFERENCE.md` and `docs/ACCESSIBILITY_REVIEW.md`; updated the README, Pages home, MkDocs navigation, task chain, release plan, and changelog to expose and govern both surfaces.
+- 2026-07-23 — Added `docs/FINANCIAL_AUTHORIZATION_REVIEW.md`; synchronized README, Pages navigation and overview, task chain, punch list, release plan, and changelog with its role-separation, evidence-lifecycle, onboarding, correction, revocation, and rollback boundaries.
 
 ### Accessibility
 - 2026-07-19 — Added visible keyboard focus, reduced-motion behavior, readable responsive tables, semantic navigation, and warning presentation that does not rely on color alone.
 - 2026-07-21 — Required authority, environment, result, and finality distinctions to remain understandable without diagrams or color alone.
 - 2026-07-21 — Required device, enrollment, workspace, financial-authority, capability, and stop-domain distinctions to remain understandable without diagrams alone.
 - 2026-07-23 — Added a dedicated review guide covering heading and landmark structure, descriptive links, text status labels, prose-equivalent diagrams, table linearization, synthetic-example labeling, keyboard focus, 200%/400% zoom, reflow, reduced motion, and plain-language authority comprehension.
+- 2026-07-23 — Required authorization-review state, exact scope, authority source, conflicts, missing evidence, prohibited effects, correction, and revocation to remain understandable without color, hidden interface state, or portfolio-specific knowledge.
 
 ### Security
 - 2026-07-19 — Documented secret prohibitions, payment-metadata minimization, adapter-substitution and receipt risks, claims controls, workflow least privilege, incident triggers, and evidence-preserving recovery.
@@ -47,12 +51,13 @@
 - 2026-07-21 — Added threats and required witnesses for financial-approval/capability confusion, identity mismatch, stale quotes, replay, duplicate effects, false finality, privacy leakage, automated budget escalation, correction, revocation, emergency stop, and recovery.
 - 2026-07-21 — Added device-trust/financial-authority confusion, stale enrollment, wrong host, wrong workspace, loss/theft, cached approval, host/financial data commingling, and replacement-device threats.
 - 2026-07-23 — Required public contract examples to remain synthetic, visibly non-executable, and free of credentials, complete account identifiers, private device identifiers, and production transaction references.
+- 2026-07-23 — Added fail-closed review stops for missing or ambiguous authority, intent, identity, amount, destination, environment, adapter, time, device/workspace, privacy, legal, conflict, and propagation evidence.
 
 ### Implementation
 - The repository remains documentation-only; no executable payment schema, accounting engine, credential, custody, signing, adapter, testnet behavior, production transfer path, device inspection, or device-control behavior was added.
 - 2026-07-19 — Pinned MkDocs 1.6.1 and updated the validation workflow to run `mkdocs build --strict` and retain exact-source evidence.
 - 2026-07-21 — No runtime or schema implementation changed; all new contract, route, device-binding, and fixture material is documentation-only.
-- 2026-07-23 — No runtime or schema implementation changed; the contract reference and accessibility guide are review artifacts only.
+- 2026-07-23 — No runtime or schema implementation changed; the contract reference, accessibility guide, and authorization-review protocol are review artifacts only.
 
 ### Release
 - The documentation candidate remains blocked until charter and portfolio authority decisions, device/workspace identity, contract ownership, compatibility witnesses, reproducible publication, claims/accessibility/security review, checksums, provenance, and rollback evidence pass.
@@ -60,16 +65,16 @@
 - 2026-07-20 — Exact-source and checksum evidence generation became part of the candidate workflow; accepted exact-head results and all human review gates remain required.
 - 2026-07-21 — Expanded release gates to require independent financial-authority ownership, Repository `1` role approval, machine-readable gluing fixtures, finality and correction semantics, and a cross-repository emergency-stop and recovery exercise.
 - 2026-07-21 — Expanded gates to require device identity, enrollment generation, workspace/source identity, wrong-device rejection, loss/replacement behavior, and independent device, financial, and adapter recovery controls.
-- 2026-07-23 — Added explicit contract-reference and rendered-accessibility gates; all remain unapproved and require fresh exact-head evidence.
+- 2026-07-23 — Added explicit contract-reference, authorization-review, and rendered-accessibility gates; all remain unapproved and require fresh exact-head evidence.
 
 ### Deployment
 - Pages is the only proposed deployment surface; no credentialed, testnet, production payment, device-monitoring, or remote-administration deployment is authorized.
 - 2026-07-19 — The Pages source builds into `site/`; publication remains separately governed and does not constitute payment-release approval.
 - 2026-07-20 — Pull-request validation retained read-only permissions and produced review artifacts without publishing.
 - 2026-07-21 — The documentation changes do not authorize Pages publication; the updated exact head requires a fresh accepted validation artifact before review.
-- 2026-07-23 — Navigation now exposes the contract and accessibility guides; publication remains separately blocked.
+- 2026-07-23 — Navigation now exposes contract, authorization-review, and accessibility guides; publication remains separately blocked.
 
-## Entry Format
+## Entry format
 - Date
 - Category: Product / Architecture / Added / Changed / Fixed / Security / Release / Deployment
 - Summary
