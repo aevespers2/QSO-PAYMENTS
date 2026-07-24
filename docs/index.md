@@ -13,7 +13,7 @@ Repository `0` may identify a resource need, prepare a bounded local proposal, c
 
 An independent human or separately approved financial authority must issue an attributable financial authorization. Repository `1` may later admit and record a narrower execution capability after verifying that authorization, but a generic capability cannot substitute for financial approval. External adapters remain disabled.
 
-See [A.L.I.S.T.A.I.R.E. integration](ALISTAIRE_INTEGRATION.md), the [contract and interface reference](CONTRACT_REFERENCE.md), and the [obstruction and gluing analysis](OBSTRUCTION_AND_GLUING.md).
+See [A.L.I.S.T.A.I.R.E. integration](ALISTAIRE_INTEGRATION.md), the [contract and interface reference](CONTRACT_REFERENCE.md), the [independent financial authorization review guide](FINANCIAL_AUTHORIZATION_REVIEW.md), and the [obstruction and gluing analysis](OBSTRUCTION_AND_GLUING.md).
 
 ## Authority model
 
@@ -39,7 +39,7 @@ A proposal is not validation. Validation is not financial approval. Financial ap
 
 | Area | Current status | Meaning |
 |---|---|---|
-| Documentation | In scope | Architecture, terminology, trust boundaries, gluing contracts, accessible status semantics, review procedures, and release evidence |
+| Documentation | In scope | Architecture, terminology, trust boundaries, gluing contracts, accessible status semantics, authorization-review procedure, and release evidence |
 | Simulation | Not yet approved | Future deterministic calculations using fictional values and no external credentials |
 | Testnet | Not authorized | Requires separate schemas, isolated credentials, legal/security/privacy review, monitoring, emergency stop, and human approval |
 | Production | Prohibited by current scope | Cannot be inferred from schemas, fixtures, documentation, simulation, or testnet activity |
@@ -47,20 +47,21 @@ A proposal is not validation. Validation is not financial approval. Financial ap
 ## Core guarantees
 
 1. A QSO, Repository `0`, QSO-PAYMENTS, or interface cannot approve its own payment intent.
-2. Financial authorization is explicit, attributable, scoped, revocable, environment-specific, and distinct from generic capability issuance.
-3. Repository `1` cannot broaden amount, destination, environment, duration, adapter, or policy scope.
-4. Allocation routes must reconcile exactly under declared unit, precision, rounding, fee, tax, and remainder rules.
-5. Credentials, private keys, complete account identifiers, and sensitive financial data never belong in public records, QSO state, model context, repository fixtures, or Pages artifacts.
-6. Adapters remain disabled unless a separately approved release activates a named version and environment.
-7. Original proposal, intent, authorization, capability, execution evidence, receipt, dispute, correction, and reconciliation records remain linked and append-only.
-8. Pending, unknown, contradictory, reversed, disputed, or unresolved status is preserved rather than presented as successful settlement.
-9. Repository, QSO, genome, task, interface, workflow, or transported-message identity never implies financial capability.
-10. Revocation, correction, emergency stop, evidence preservation, cache invalidation, and bounded recovery must glue across every participating component.
-11. Status, authority, environment, and finality distinctions must be expressed in text and remain understandable without color or diagrams.
+2. Financial authorization is explicit, attributable, scoped, revocable, environment-specific, correction-linked, and distinct from generic capability issuance.
+3. A review record remains `DOCUMENTED_NOT_AUTHORIZED` unless a separately designated human authority issues an exact decision under approved policy; completeness, formatting, or workflow success cannot create authority.
+4. Repository `1` cannot broaden amount, destination, environment, duration, adapter, or policy scope.
+5. Allocation routes must reconcile exactly under declared unit, precision, rounding, fee, tax, and remainder rules.
+6. Credentials, private keys, complete account identifiers, and sensitive financial data never belong in public records, QSO state, model context, repository fixtures, or Pages artifacts.
+7. Adapters remain disabled unless a separately approved release activates a named version and environment.
+8. Original proposal, intent, authorization, capability, execution evidence, receipt, dispute, correction, and reconciliation records remain linked and append-only.
+9. Pending, unknown, contradictory, reversed, disputed, or unresolved status is preserved rather than presented as successful settlement.
+10. Repository, QSO, genome, task, interface, workflow, or transported-message identity never implies financial capability.
+11. Revocation, correction, emergency stop, evidence preservation, cache invalidation, and bounded recovery must glue across every participating component.
+12. Status, authority, environment, and finality distinctions must be expressed in text and remain understandable without color or diagrams.
 
 ## Material obstruction
 
-The portfolio has not yet adopted one jointly versioned contract separating independent financial approval from Repository `1` capability admission. Without that distinction, a technical permission could be misrepresented as authority to spend, or adapter success could be misrepresented as final settlement. The [obstruction and gluing analysis](OBSTRUCTION_AND_GLUING.md) records 18 active incompatibilities and the pairwise and triple-overlap witnesses required to resolve them.
+The portfolio has not yet adopted one jointly versioned contract separating independent financial approval from Repository `1` capability admission. It also lacks an approved independent authorizer, authority-source model, exact review-record profile, consumer-notification topology, and correction/revocation owner. Without those boundaries, a technical permission or complete review form could be misrepresented as authority to spend, or adapter success could be misrepresented as final settlement. The [obstruction and gluing analysis](OBSTRUCTION_AND_GLUING.md) records 18 active incompatibilities and the pairwise and triple-overlap witnesses required to resolve them.
 
 ## Documentation map
 
@@ -71,6 +72,7 @@ The portfolio has not yet adopted one jointly versioned contract separating inde
 - [Obstruction and gluing analysis](OBSTRUCTION_AND_GLUING.md): active compatibility failures, pairwise contracts, triple-overlap witnesses, result semantics, and acceptance order.
 - [Design contracts](DESIGN_CONTRACTS.md): proposed record semantics, invariants, failure modes, and compatibility rules.
 - [Contract and interface reference](CONTRACT_REFERENCE.md): conceptual interface surfaces, record families, envelope, statuses, reason codes, examples, migration, and authority limits.
+- [Independent financial authorization review](FINANCIAL_AUTHORIZATION_REVIEW.md): role separation, decision states, exact bindings, evidence package, fail-closed stops, correction and revocation, gluing witnesses, and reviewer onboarding.
 - [Developer onboarding](ONBOARDING.md): local documentation setup, contribution workflow, and review checklist.
 - [Accessibility and plain-language review](ACCESSIBILITY_REVIEW.md): text-equivalent status semantics, diagram alternatives, navigation, keyboard, zoom, and comprehension review.
 - [Security and privacy](SECURITY_PRIVACY.md): threat model, data minimization, secret handling, and claims controls.
@@ -79,4 +81,4 @@ The portfolio has not yet adopted one jointly versioned contract separating inde
 
 ## Release posture
 
-The release remains blocked until the payment charter, financial authority, Repository `1` role, contract owner, identity namespaces, compatibility witnesses, privacy and retention model, and recovery owners are approved. The current exact head must also pass reproducible strict documentation validation, accessibility and claims review, independent security/privacy review, checksum and provenance retention, separately authorized publication verification, and rollback evidence. See the repository [task chain](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/taskchain.md), [punch list](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/punchlist.md), [release plan](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/release.md), and [changelog](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/changelog.md).
+The release remains blocked until the payment charter, financial authority, Repository `1` role, contract owner, identity namespaces, compatibility witnesses, privacy and retention model, and recovery owners are approved. The current exact head must also pass reproducible strict documentation validation, financial-authorization-record review, accessibility and claims review, independent security/privacy review, checksum and provenance retention, separately authorized publication verification, and rollback evidence. See the repository [task chain](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/taskchain.md), [punch list](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/punchlist.md), [release plan](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/release.md), and [changelog](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/changelog.md).
