@@ -1,0 +1,56 @@
+site_name: QSO-PAYMENTS
+site_description: Audit-first economic intent, portable trust separation, authorization, allocation, evidence, status/finality semantics, gluing analysis, and disabled adapter boundaries for A.L.I.S.T.A.I.R.E.
+site_url: https://aevespers2.github.io/QSO-PAYMENTS/
+repo_url: https://github.com/aevespers2/QSO-PAYMENTS
+repo_name: aevespers2/QSO-PAYMENTS
+edit_uri: edit/main/docs/
+copyright: Documentation-only charter candidate. No custody, signing, settlement, investment product, autonomous transfer, or promise of returns.
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.action.edit
+
+nav:
+  - Overview: index.md
+  - Project guide: PROJECT_GUIDE.md
+  - Architecture: ARCHITECTURE.md
+  - A.L.I.S.T.A.I.R.E. integration: ALISTAIRE_INTEGRATION.md
+  - Portable trust and financial authority: PORTABLE_TRUST_FINANCIAL_BOUNDARY.md
+  - Obstruction and gluing analysis: OBSTRUCTION_AND_GLUING.md
+  - Design contracts: DESIGN_CONTRACTS.md
+  - Contract and interface reference: CONTRACT_REFERENCE.md
+  - Consumer integration and conformance: CONSUMER_INTEGRATION_GUIDE.md
+  - Independent financial authorization review: FINANCIAL_AUTHORIZATION_REVIEW.md
+  - Status, finality, and correction lifecycle: STATUS_FINALITY_LIFECYCLE.md
+  - Developer onboarding: ONBOARDING.md
+  - Accessibility and plain-language review: ACCESSIBILITY_REVIEW.md
+  - Security and privacy: SECURITY_PRIVACY.md
+  - Operations and recovery: OPERATIONS.md
+  - Decisions:
+      - Documentation-only boundary: decisions/0001-documentation-only-boundary.md
+  - Repository controls:
+      - Task chain: https://github.com/aevespers2/QSO-PAYMENTS/blob/main/taskchain.md
+      - Punch list: https://github.com/aevespers2/QSO-PAYMENTS/blob/main/punchlist.md
+      - Release plan: https://github.com/aevespers2/QSO-PAYMENTS/blob/main/release.md
+      - Changelog: https://github.com/aevespers2/QSO-PAYMENTS/blob/main/changelog.md
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+strict: true

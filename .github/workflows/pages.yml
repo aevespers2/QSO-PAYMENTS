@@ -1,40 +1,157 @@
-name: Deploy GitHub Pages
+name: Validate GitHub Pages candidate
 
 on:
+  pull_request:
+    paths:
+      - "docs/**"
+      - "README.md"
+      - "taskchain.md"
+      - "release.md"
+      - "changelog.md"
+      - "punchlist.md"
+      - "mkdocs.yml"
+      - "requirements-docs.txt"
+      - ".github/workflows/pages.yml"
   push:
     branches: [main]
     paths:
       - "docs/**"
+      - "README.md"
+      - "taskchain.md"
+      - "release.md"
+      - "changelog.md"
+      - "punchlist.md"
+      - "mkdocs.yml"
+      - "requirements-docs.txt"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: pages-validation-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    env:
+      CHECKOUT_REF: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Checkout submitted source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
+          ref: ${{ env.CHECKOUT_REF }}
+          fetch-depth: 1
           persist-credentials: false
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-      - name: Upload site
-        uses: actions/upload-pages-artifact@v3
+          show-progress: false
+
+      - name: Assert immutable source identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          actual_sha="$(git rev-parse HEAD)"
+          test "$actual_sha" = "$CHECKOUT_REF"
+          test -z "$(git status --porcelain)"
+          {
+            printf 'repository=%s\n' "$GITHUB_REPOSITORY"
+            printf 'source_sha=%s\n' "$actual_sha"
+            printf 'workflow_run=%s\n' "$GITHUB_RUN_ID"
+            printf 'workflow_attempt=%s\n' "$GITHUB_RUN_ATTEMPT"
+          } | tee evidence/source-identity.txt
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
-          path: docs
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-docs.txt
+
+      - name: Install documentation dependencies
+        id: dependencies
+        continue-on-error: true
+        shell: bash
+        run: |
+          set +e
+          python -m pip install --requirement requirements-docs.txt > evidence/dependency-install.txt 2>&1
+          status=$?
+          python -m pip freeze | sort > evidence/dependencies.txt 2>&1
+          cat evidence/dependency-install.txt
+          echo "status=${status}" >> "$GITHUB_OUTPUT"
+          exit "$status"
+
+      - name: Build documentation strictly
+        id: build
+        continue-on-error: true
+        shell: bash
+        run: |
+          set +e
+          mkdocs build --strict --site-dir site > evidence/mkdocs-build.txt 2>&1
+          status=$?
+          cat evidence/mkdocs-build.txt
+          echo "status=${status}" >> "$GITHUB_OUTPUT"
+          exit "$status"
+
+      - name: Validate generated-site boundary
+        id: boundary
+        continue-on-error: true
+        shell: bash
+        run: |
+          set +e
+          status=0
+          if [ ! -f site/index.html ]; then
+            echo 'site/index.html is missing' > evidence/site-boundary.txt
+            status=1
+          else
+            {
+              ! find site -type f \( -name '*.pem' -o -name '*.key' -o -name '*.p12' -o -name '*.pfx' -o -name '.env' -o -name '.env.*' \) -print -quit | grep -q .
+              ! grep -RIlE '(BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY|gh[pousr]_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9_-]{20,})' site
+            } > evidence/site-boundary.txt 2>&1 || status=1
+          fi
+          cat evidence/site-boundary.txt
+          echo "status=${status}" >> "$GITHUB_OUTPUT"
+          exit "$status"
+
+      - name: Generate exact-head documentation evidence
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -d site ]; then
+            find site -type f -print0 | sort -z | xargs -0 sha256sum > evidence/site-sha256.txt
+          else
+            : > evidence/site-sha256.txt
+          fi
+          {
+            printf 'python=%s\n' "$(python --version 2>&1)"
+            printf 'dependency_status=%s\n' "${{ steps.dependencies.outputs.status || 'not-run' }}"
+            printf 'build_status=%s\n' "${{ steps.build.outputs.status || 'not-run' }}"
+            printf 'boundary_status=%s\n' "${{ steps.boundary.outputs.status || 'not-run' }}"
+            printf 'generated_utc=%s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          } | tee evidence/run-summary.txt
+          find evidence -maxdepth 1 -type f ! -name 'sha256.txt' -print0 \
+            | sort -z \
+            | xargs -0 sha256sum > evidence/sha256.txt
+
+      - name: Upload reviewable exact-head documentation artifact
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: qso-payments-docs-${{ env.CHECKOUT_REF }}
+          path: |
+            site
+            evidence
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Fail when validation is incomplete or invalid
+        if: always()
+        shell: bash
+        run: |
+          test "${{ steps.dependencies.outputs.status }}" = "0"
+          test "${{ steps.build.outputs.status }}" = "0"
+          test "${{ steps.boundary.outputs.status }}" = "0"
