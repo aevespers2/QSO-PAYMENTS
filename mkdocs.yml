@@ -1,5 +1,5 @@
 site_name: QSO-PAYMENTS
-site_description: Audit-first economic intent, portable trust separation, authorization, allocation, evidence, gluing analysis, and disabled adapter boundaries for A.L.I.S.T.A.I.R.E.
+site_description: Audit-first economic intent, portable trust separation, authorization, allocation, evidence, status/finality semantics, gluing analysis, and disabled adapter boundaries for A.L.I.S.T.A.I.R.E.
 site_url: https://aevespers2.github.io/QSO-PAYMENTS/
 repo_url: https://github.com/aevespers2/QSO-PAYMENTS
 repo_name: aevespers2/QSO-PAYMENTS
@@ -23,6 +23,7 @@ nav:
   - Design contracts: DESIGN_CONTRACTS.md
   - Contract and interface reference: CONTRACT_REFERENCE.md
   - Independent financial authorization review: FINANCIAL_AUTHORIZATION_REVIEW.md
+  - Status, finality, and correction lifecycle: STATUS_FINALITY_LIFECYCLE.md
   - Developer onboarding: ONBOARDING.md
   - Accessibility and plain-language review: ACCESSIBILITY_REVIEW.md
   - Security and privacy: SECURITY_PRIVACY.md
