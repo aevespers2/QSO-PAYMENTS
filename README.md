@@ -35,6 +35,7 @@ Repository `0` may propose and verify resource needs but cannot approve or fund 
 - [Design contracts](docs/DESIGN_CONTRACTS.md)
 - [Contract and interface reference](docs/CONTRACT_REFERENCE.md)
 - [Independent financial authorization review](docs/FINANCIAL_AUTHORIZATION_REVIEW.md)
+- [Status, finality, and correction lifecycle](docs/STATUS_FINALITY_LIFECYCLE.md)
 - [Developer onboarding](docs/ONBOARDING.md)
 - [Accessibility and plain-language review](docs/ACCESSIBILITY_REVIEW.md)
 - [Security and privacy](docs/SECURITY_PRIVACY.md)
@@ -59,6 +60,8 @@ A.L.I.S.T.A.I.R.E. objective or bounded human/QSO proposal
 ```
 
 A proposal is not authorization. Financial authorization is not a reusable credential. A generic capability is not financial approval. Authorization is not settlement. A receipt is adapter-reported evidence, not an unconditional claim of finality. Documentation and simulation evidence do not establish production capability.
+
+QSO-PAYMENTS documents three independent status dimensions: **processing**, **authority**, and **evidence/finality**. Technical completion cannot create financial approval; adapter-reported success cannot create canonical acceptance; canonical acceptance cannot silently establish jurisdiction-dependent legal finality. Corrections, revocations, reversals, disputes, and unknown outcomes remain linked and visible.
 
 ## Environment model
 
@@ -90,6 +93,7 @@ The validation workflow builds the pinned MkDocs site, asserts the submitted sou
 - Allocation totals must reconcile under explicit fixed-precision, rounding, fee, tax, and remainder rules or fail closed.
 - Retries require shared idempotency and replay domains and cannot duplicate a previously accepted route.
 - Missing, stale, contradictory, partial, or unverifiable evidence remains `PENDING`, `UNKNOWN`, `DISPUTED`, or another explicit non-success state.
+- A `COMPLETED` processing stage, `AUTHORIZED` decision, `ADAPTER_REPORTED` outcome, `RECONCILED` result, canonical disposition, and legal finality are different claims and must never be collapsed.
 - Revocation, correction, emergency stop, evidence preservation, cache invalidation, and bounded recovery must work across every participating repository.
 - Status, authority, environment, and finality distinctions must remain understandable without color, diagrams, or portfolio-specific shorthand.
 - No documentation page constitutes a financial product, custody service, settlement service, legal certification, suitability determination, or promise of returns.

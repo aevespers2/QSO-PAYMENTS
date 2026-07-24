@@ -9,23 +9,23 @@ This checklist governs the documentation-only candidate. A checked item requires
 - [ ] Repository `0` proposal/observation role and Repository `1` device, capability, and canonical-disposition role approved or replaced.
 - [ ] Device identity, ownership scope, enrollment generation, workspace/source identity, replacement, retirement, and revocation ownership designated.
 - [ ] Independent financial authorizer and revoker designated with an approved authority-source model.
-- [ ] Generic capability issuer/revoker, adapter credential/custody/signing owner, incident owner, emergency-stop owner, recovery owner, and release owner designated.
+- [ ] Generic capability issuer/revoker, adapter credential/custody/signing owner, incident owner, emergency-stop owner, recovery owner, release owner, and status-transition steward designated.
 - [ ] Shared schema/package, status/reason-code, identity-namespace, compatibility, and migration owner approved.
 - [ ] Data classification, minimization, retention, disclosure, deletion, legal-hold, and correction model approved.
-- [ ] Architecture, financial, security, privacy, accessibility, claims/legal, and release reviewers named.
+- [ ] Architecture, financial, contract, legal/finality, security, privacy, accessibility, claims, recovery, and release reviewers named.
 
 Evidence: _pending_
 
 ## P1 — Authority separation and gluing
 
-- [ ] Resource proposal, validation, independent financial authorization, generic capability, adapter execution, receipt evidence, reconciliation, canonical disposition, custody, and settlement remain distinct.
+- [ ] Resource proposal, validation, independent financial authorization, generic capability, adapter execution, receipt evidence, reconciliation, canonical disposition, custody, settlement, and legal finality remain distinct.
 - [ ] Device enrollment is distinct from financial approval and workspace/repository authority.
 - [ ] Financial authorization is distinct from a reusable credential or general technical capability.
 - [ ] Adapter execution is distinct from receipt validation, reconciliation, canonical acceptance, and legal finality.
 - [ ] Repository `0` → QSO-PAYMENTS → review → financial authority → Repository `1` route approved.
 - [ ] Wrong requester, beneficiary, authorizer, destination, device, enrollment generation, workspace, repository, expected head, environment, adapter, amount, or time window fails closed.
 - [ ] Lost, stolen, revoked, retired, and replacement-device lifecycle approved.
-- [ ] Currency, unit, fixed precision, rounding, fee, tax, remainder, quote freshness, retry, replay, duplicate, partial-failure, dispute, reversal, correction, and finality semantics approved.
+- [ ] Currency, unit, fixed precision, rounding, fee, tax, remainder, quote freshness, retry, replay, duplicate, partial-failure, unknown-outcome, dispute, reversal, correction, canonical-disposition, and legal-finality semantics approved.
 - [ ] Device, financial, adapter, and portfolio stop domains and recovery order approved.
 - [ ] Pairwise contract edges, triple-overlap witnesses, active obstructions, and residual risks reviewed.
 
@@ -62,14 +62,32 @@ Evidence: _pending_
 
 Evidence: _pending_
 
+## P1C — Status, finality, and correction lifecycle
+
+- [ ] Processing, authority, and evidence/finality status dimensions remain independent.
+- [ ] `COMPLETED` processing does not imply financial authorization, adapter success, reconciliation, canonical acceptance, settlement, or legal finality.
+- [ ] `AUTHORIZED` requires an approved independent authority and exact scope; it does not imply credentials, custody, adapter access, execution, settlement, or finality.
+- [ ] `ADAPTER_REPORTED` is the strongest status an adapter may assign to itself.
+- [ ] `RECONCILED`, `CANONICALLY_ACCEPTED`, and legal finality have separate owners and evidence requirements.
+- [ ] Proposal-to-authorization, device-trust-to-authorization, submission-to-reconciliation, adapter-success-to-finality, and silent-scope-broadening transitions are prohibited.
+- [ ] Partial, unknown, failed, reversed, refunded, disputed, corrected, expired, revoked, superseded, and withdrawn states remain visible and non-successful where applicable.
+- [ ] Retry after an unknown outcome requires the original idempotency and replay domains and cannot duplicate effect.
+- [ ] Corrections and revocations are append-only, invalidate dependent cached state, reach every registered consumer, and preserve the superseded generation.
+- [ ] Unreachable or non-acknowledging consumers remain blocking findings.
+- [ ] Every rendered status exposes object, scope, actor/owner or vacancy, observation time, uncertainty, active correction/revocation/dispute, and next permitted action in text.
+- [ ] Lifecycle diagrams have complete prose equivalents and tables linearize for screen readers and zoom/reflow.
+- [ ] The lifecycle guide is reviewed without being represented as an executable state machine, accepted status registry, financial authority, or finality determination.
+
+Evidence: _pending_
+
 ## P2 — Future machine-readable compatibility evidence
 
 Executable schemas and fixtures require separate approval.
 
-- [ ] Canonical owner publishes immutable schemas, semantic profiles, canonical bytes, digest/signature scope, status registry, reason-code registry, and compatibility policy.
+- [ ] Canonical owner publishes immutable schemas, semantic profiles, canonical bytes, digest/signature scope, status registry, reason-code registry, transition rules, and compatibility policy.
 - [ ] Identical positive fixtures pass in every participating repository.
-- [ ] Malformed, unsupported, stale, replayed, duplicate, wrong-identity, wrong-device, wrong-workspace, wrong-head, wrong-environment, wrong-adapter, over-limit, expired, and revoked fixtures fail closed.
-- [ ] Fixed-precision allocation, quote freshness, idempotency, partial failure, timeout, retry, reversal, refund, dispute, correction, and reconciliation vectors pass.
+- [ ] Malformed, unsupported, stale, replayed, duplicate, wrong-identity, wrong-device, wrong-workspace, wrong-head, wrong-environment, wrong-adapter, over-limit, expired, revoked, and invalid-transition fixtures fail closed.
+- [ ] Fixed-precision allocation, quote freshness, idempotency, partial failure, unknown outcome, timeout, retry, reversal, refund, dispute, correction, reconciliation, canonical-disposition, and finality vectors pass.
 - [ ] Revocation and correction invalidate cached review state and every dependent capability.
 - [ ] Lost-device and replacement-device fixtures preserve evidence and require fresh admissible bindings.
 - [ ] Recovery restores a bounded state without deleting incident history.
@@ -81,7 +99,7 @@ Evidence: _pending; no executable contract is authorized_
 - [ ] Candidate commit and submitted head are immutable and recorded.
 - [ ] Clean checkout, pinned dependencies, and `mkdocs build --strict` pass.
 - [ ] Required files, navigation, and local links validate.
-- [ ] Contract, authorization-review, and accessibility guides appear in the rendered site.
+- [ ] Contract, authorization-review, status/finality lifecycle, and accessibility guides appear in the rendered site.
 - [ ] Pull-request workflow has read-only permissions and no Pages deployment, token-minting, payment, or infrastructure authority.
 - [ ] Action and dependency identities, source archive, rendered site, source-identity record, SHA-256 manifests, and provenance record are retained.
 - [ ] Generated output contains no credentials, account data, private device identifiers, network inventories, authorization records, or deployment secrets.
@@ -93,12 +111,12 @@ Evidence: _pending accepted exact-head result after the current documentation ch
 
 - [ ] Purpose and non-goals are consistent across README, Pages, task chain, punch list, release plan, and changelog.
 - [ ] A.L.I.S.T.A.I.R.E. objective and QSO-PAYMENTS subsystem role are consistent.
-- [ ] Proposal, validation, authorization review, authorization, capability, execution, receipt, reconciliation, dispute, custody, and settlement are never conflated.
-- [ ] A complete review record, trusted device, repository role, interface control, passing workflow, or model recommendation is never described as financial authority.
+- [ ] Proposal, validation, authorization review, authorization, capability, execution, adapter evidence, reconciliation, canonical disposition, dispute, custody, settlement, and legal finality are never conflated.
+- [ ] A complete review record, trusted device, repository role, interface control, completed stage, adapter report, passing workflow, or model recommendation is never described as financial authority or finality.
 - [ ] No custody, signing, settlement-service, investment, suitability, certification, jurisdictional approval, or return promise is implied.
-- [ ] Finality, pending, unknown, partial, reversal, dispute, correction, expiry, revocation, and withdrawal limitations are visible.
+- [ ] Finality, pending, unknown, partial, reversal, dispute, correction, expiry, revocation, supersession, and withdrawal limitations are visible.
 - [ ] Repository dependency descriptions do not transfer authority.
-- [ ] Architecture, contract, authorization-review, accessibility, security/privacy, operations, release, and rollback documents receive human review.
+- [ ] Architecture, contract, authorization-review, lifecycle/finality, accessibility, security/privacy, operations, release, and rollback documents receive human review.
 
 Evidence: _pending_
 
@@ -106,10 +124,10 @@ Evidence: _pending_
 
 - [ ] Heading structure, landmarks, navigation, link purpose, keyboard path, visible focus, contrast, and reduced motion reviewed.
 - [ ] Tables and code blocks remain usable at 200% and 400% zoom and reflow without loss.
-- [ ] Warnings, authority states, environments, device states, result states, and review states do not rely on color alone.
+- [ ] Warnings, authority states, environments, device states, processing states, evidence/finality states, and review states do not rely on color alone.
 - [ ] Every meaningful diagram has equivalent prose.
 - [ ] Every example is labeled documentation-only, illustrative, synthetic, or executable.
-- [ ] A reader unfamiliar with the portfolio can identify proposer, validator, independent authorizer, capability issuer, adapter, reconciler, revoker, incident owner, unresolved evidence, and prohibited effects.
+- [ ] A reader unfamiliar with the portfolio can identify proposer, validator, independent authorizer, capability issuer, adapter, reconciler, disposition owner, revoker, incident owner, unresolved evidence, finality limit, and prohibited effects.
 
 Evidence: _pending_
 
@@ -117,7 +135,7 @@ Evidence: _pending_
 
 - [ ] Source and rendered output scanned for secrets and sensitive personal, device, network, or financial data.
 - [ ] External links, remote content, workflow supply chain, artifact retention, and publication risks reviewed.
-- [ ] Self-approval, financial-authority/capability confusion, trusted-device/financial-permission confusion, cached authorization, replay, duplicate effect, adapter substitution, receipt forgery, and false-finality threats reviewed.
+- [ ] Self-approval, financial-authority/capability confusion, trusted-device/financial-permission confusion, cached authorization, invalid transition, replay, duplicate effect, adapter substitution, receipt forgery, and false-finality threats reviewed.
 - [ ] Data minimization, tokenization, redaction, retention, disclosure, deletion, correction, revocation, and legal-hold rules reviewed.
 - [ ] Automated budget escalation, self-funding loops, urgency overrides, and conflict-of-interest bypasses are prohibited.
 - [ ] Incident contacts, containment authority, independent emergency disable, consumer notification, recovery order, and rollback owner are recorded.
@@ -130,9 +148,9 @@ Evidence: _pending_
 - [ ] Published URL, deployed commit, claims, links, navigation, accessibility, security/privacy, and rollback route verified.
 - [ ] Prior verified artifact identified and restoration credibly demonstrated.
 - [ ] Correction or withdrawal updates every controlled documentation route.
-- [ ] Device loss, financial revocation, adapter disable, consumer invalidation, and replacement-device tabletop completed before any executable environment.
-- [ ] Documentation, architecture, contract, financial, security, privacy, accessibility, claims/legal, device-trust, portfolio, and release reviewers approve their bounded responsibilities.
+- [ ] Device loss, financial revocation, adapter disable, status correction, consumer invalidation, and replacement-device tabletop completed before any executable environment.
+- [ ] Documentation, architecture, contract, financial, legal/finality, security, privacy, accessibility, claims, device-trust, portfolio, recovery, and release reviewers approve their bounded responsibilities.
 
 Decision: `BLOCKED`
 
-Reason: Charter, independent financial authority, authority-source policy, device/workspace identity, Repository `1` role, schema/status/reason-code ownership, compatibility witnesses, exact-head review evidence, rendered accessibility review, legal/privacy/security review, publication approval, correction/revocation propagation, and recovery ownership remain pending. No simulation, testnet, adapter, device-control, or production payment work is authorized.
+Reason: Charter, independent financial authority, authority-source policy, device/workspace identity, Repository `1` role, schema/status/reason-code/transition ownership, compatibility witnesses, exact-head review evidence, rendered accessibility review, legal/privacy/security review, publication approval, correction/revocation propagation, finality ownership, and recovery ownership remain pending. No simulation, testnet, adapter, device-control, or production payment work is authorized.

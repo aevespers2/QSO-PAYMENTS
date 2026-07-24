@@ -13,7 +13,7 @@ Repository `0` may identify a resource need, prepare a bounded local proposal, c
 
 An independent human or separately approved financial authority must issue an attributable financial authorization. Repository `1` may later admit and record a narrower execution capability after verifying that authorization, but a generic capability cannot substitute for financial approval. External adapters remain disabled.
 
-See [A.L.I.S.T.A.I.R.E. integration](ALISTAIRE_INTEGRATION.md), the [contract and interface reference](CONTRACT_REFERENCE.md), the [independent financial authorization review guide](FINANCIAL_AUTHORIZATION_REVIEW.md), and the [obstruction and gluing analysis](OBSTRUCTION_AND_GLUING.md).
+See [A.L.I.S.T.A.I.R.E. integration](ALISTAIRE_INTEGRATION.md), the [contract and interface reference](CONTRACT_REFERENCE.md), the [independent financial authorization review guide](FINANCIAL_AUTHORIZATION_REVIEW.md), the [status, finality, and correction lifecycle](STATUS_FINALITY_LIFECYCLE.md), and the [obstruction and gluing analysis](OBSTRUCTION_AND_GLUING.md).
 
 ## Authority model
 
@@ -35,11 +35,21 @@ flowchart LR
 
 A proposal is not validation. Validation is not financial approval. Financial approval is not a reusable credential. A capability is not approval. Adapter execution is not canonical acceptance or legal finality. Reconciliation preserves uncertainty and correction history.
 
+## Status and finality model
+
+Future records must preserve three independent dimensions rather than compressing all meaning into one `status` field:
+
+1. **Processing status** — where a bounded technical stage is in its workflow.
+2. **Authority status** — whether an approved independent authority issued an exact decision.
+3. **Evidence/finality status** — what execution evidence exists and whether it has been reconciled or independently accepted.
+
+A completed processing stage is not authorization. An authorization is not a credential or execution result. Adapter-reported success is not reconciliation, canonical acceptance, or legal finality. Partial, unknown, disputed, reversed, corrected, expired, revoked, superseded, and withdrawn states remain first-class and visible.
+
 ## Current product boundary
 
 | Area | Current status | Meaning |
 |---|---|---|
-| Documentation | In scope | Architecture, terminology, trust boundaries, gluing contracts, accessible status semantics, authorization-review procedure, and release evidence |
+| Documentation | In scope | Architecture, terminology, trust boundaries, gluing contracts, accessible status semantics, authorization-review procedure, lifecycle/finality distinctions, and release evidence |
 | Simulation | Not yet approved | Future deterministic calculations using fictional values and no external credentials |
 | Testnet | Not authorized | Requires separate schemas, isolated credentials, legal/security/privacy review, monitoring, emergency stop, and human approval |
 | Production | Prohibited by current scope | Cannot be inferred from schemas, fixtures, documentation, simulation, or testnet activity |
@@ -58,10 +68,12 @@ A proposal is not validation. Validation is not financial approval. Financial ap
 10. Repository, QSO, genome, task, interface, workflow, or transported-message identity never implies financial capability.
 11. Revocation, correction, emergency stop, evidence preservation, cache invalidation, and bounded recovery must glue across every participating component.
 12. Status, authority, environment, and finality distinctions must be expressed in text and remain understandable without color or diagrams.
+13. `COMPLETED`, `AUTHORIZED`, `ADAPTER_REPORTED`, `RECONCILED`, `CANONICALLY_ACCEPTED`, and legal finality are distinct claims with separate owners and evidence requirements.
+14. Corrections, revocations, reversals, disputes, and superseding records never delete or silently rewrite the prior generation.
 
 ## Material obstruction
 
-The portfolio has not yet adopted one jointly versioned contract separating independent financial approval from Repository `1` capability admission. It also lacks an approved independent authorizer, authority-source model, exact review-record profile, consumer-notification topology, and correction/revocation owner. Without those boundaries, a technical permission or complete review form could be misrepresented as authority to spend, or adapter success could be misrepresented as final settlement. The [obstruction and gluing analysis](OBSTRUCTION_AND_GLUING.md) records 18 active incompatibilities and the pairwise and triple-overlap witnesses required to resolve them.
+The portfolio has not yet adopted one jointly versioned contract separating independent financial approval from Repository `1` capability admission. It also lacks an approved independent authorizer, authority-source model, exact review-record profile, canonical multi-dimensional status registry, transition owner, consumer-notification topology, and correction/revocation owner. Without those boundaries, a technical permission or complete review form could be misrepresented as authority to spend, or adapter success could be misrepresented as final settlement. The [obstruction and gluing analysis](OBSTRUCTION_AND_GLUING.md) records 18 active incompatibilities and the pairwise and triple-overlap witnesses required to resolve them.
 
 ## Documentation map
 
@@ -73,6 +85,7 @@ The portfolio has not yet adopted one jointly versioned contract separating inde
 - [Design contracts](DESIGN_CONTRACTS.md): proposed record semantics, invariants, failure modes, and compatibility rules.
 - [Contract and interface reference](CONTRACT_REFERENCE.md): conceptual interface surfaces, record families, envelope, statuses, reason codes, examples, migration, and authority limits.
 - [Independent financial authorization review](FINANCIAL_AUTHORIZATION_REVIEW.md): role separation, decision states, exact bindings, evidence package, fail-closed stops, correction and revocation, gluing witnesses, and reviewer onboarding.
+- [Status, finality, and correction lifecycle](STATUS_FINALITY_LIFECYCLE.md): three-dimensional status semantics, transition constraints, partial/unknown outcomes, correction closure, accessible rendering, and reviewer onboarding.
 - [Developer onboarding](ONBOARDING.md): local documentation setup, contribution workflow, and review checklist.
 - [Accessibility and plain-language review](ACCESSIBILITY_REVIEW.md): text-equivalent status semantics, diagram alternatives, navigation, keyboard, zoom, and comprehension review.
 - [Security and privacy](SECURITY_PRIVACY.md): threat model, data minimization, secret handling, and claims controls.
@@ -81,4 +94,4 @@ The portfolio has not yet adopted one jointly versioned contract separating inde
 
 ## Release posture
 
-The release remains blocked until the payment charter, financial authority, Repository `1` role, contract owner, identity namespaces, compatibility witnesses, privacy and retention model, and recovery owners are approved. The current exact head must also pass reproducible strict documentation validation, financial-authorization-record review, accessibility and claims review, independent security/privacy review, checksum and provenance retention, separately authorized publication verification, and rollback evidence. See the repository [task chain](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/taskchain.md), [punch list](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/punchlist.md), [release plan](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/release.md), and [changelog](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/changelog.md).
+The release remains blocked until the payment charter, financial authority, Repository `1` role, contract owner, identity namespaces, status and transition ownership, compatibility witnesses, privacy and retention model, and recovery owners are approved. The current exact head must also pass reproducible strict documentation validation, financial-authorization-record review, lifecycle/finality review, accessibility and claims review, independent security/privacy review, checksum and provenance retention, separately authorized publication verification, and rollback evidence. See the repository [task chain](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/taskchain.md), [punch list](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/punchlist.md), [release plan](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/release.md), and [changelog](https://github.com/aevespers2/QSO-PAYMENTS/blob/main/changelog.md).
