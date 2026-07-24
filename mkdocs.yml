@@ -22,6 +22,7 @@ nav:
   - Obstruction and gluing analysis: OBSTRUCTION_AND_GLUING.md
   - Design contracts: DESIGN_CONTRACTS.md
   - Contract and interface reference: CONTRACT_REFERENCE.md
+  - Independent financial authorization review: FINANCIAL_AUTHORIZATION_REVIEW.md
   - Developer onboarding: ONBOARDING.md
   - Accessibility and plain-language review: ACCESSIBILITY_REVIEW.md
   - Security and privacy: SECURITY_PRIVACY.md

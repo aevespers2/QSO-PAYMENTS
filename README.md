@@ -34,6 +34,7 @@ Repository `0` may propose and verify resource needs but cannot approve or fund 
 - [Obstruction and gluing analysis](docs/OBSTRUCTION_AND_GLUING.md)
 - [Design contracts](docs/DESIGN_CONTRACTS.md)
 - [Contract and interface reference](docs/CONTRACT_REFERENCE.md)
+- [Independent financial authorization review](docs/FINANCIAL_AUTHORIZATION_REVIEW.md)
 - [Developer onboarding](docs/ONBOARDING.md)
 - [Accessibility and plain-language review](docs/ACCESSIBILITY_REVIEW.md)
 - [Security and privacy](docs/SECURITY_PRIVACY.md)
@@ -82,6 +83,7 @@ The validation workflow builds the pinned MkDocs site, asserts the submitted sou
 ## Safety boundary
 
 - QSOs and Repository `0` workflows may produce bounded, reviewable payment intents; they cannot approve their own intents.
+- Independent financial authorization must be attributable, exactly scoped, time-bounded, revocable, correction-linked, and separately governed; a review record cannot create authority merely by being complete or well formatted.
 - Repository `1` cannot invent financial approval or broaden an accepted amount, destination, environment, duration, or adapter scope.
 - External adapters remain disabled until separately authorized, tested, audited, legally reviewed, and operationally governed.
 - Credentials, private keys, complete account identifiers, and sensitive payment data must not appear in repository records, fixtures, logs, model context, or public artifacts.
