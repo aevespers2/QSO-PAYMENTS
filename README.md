@@ -34,6 +34,7 @@ Repository `0` may propose and verify resource needs but cannot approve or fund 
 - [Obstruction and gluing analysis](docs/OBSTRUCTION_AND_GLUING.md)
 - [Design contracts](docs/DESIGN_CONTRACTS.md)
 - [Contract and interface reference](docs/CONTRACT_REFERENCE.md)
+- [Consumer integration and conformance](docs/CONSUMER_INTEGRATION_GUIDE.md)
 - [Independent financial authorization review](docs/FINANCIAL_AUTHORIZATION_REVIEW.md)
 - [Status, finality, and correction lifecycle](docs/STATUS_FINALITY_LIFECYCLE.md)
 - [Developer onboarding](docs/ONBOARDING.md)
@@ -95,5 +96,6 @@ The validation workflow builds the pinned MkDocs site, asserts the submitted sou
 - Missing, stale, contradictory, partial, or unverifiable evidence remains `PENDING`, `UNKNOWN`, `DISPUTED`, or another explicit non-success state.
 - A `COMPLETED` processing stage, `AUTHORIZED` decision, `ADAPTER_REPORTED` outcome, `RECONCILED` result, canonical disposition, and legal finality are different claims and must never be collapsed.
 - Revocation, correction, emergency stop, evidence preservation, cache invalidation, and bounded recovery must work across every participating repository.
+- Consumer integrations must declare accepted profiles, record families, environments, status dimensions, correction routes, privacy rules, and rollback generations; parsing or rendering cannot broaden meaning.
 - Status, authority, environment, and finality distinctions must remain understandable without color, diagrams, or portfolio-specific shorthand.
 - No documentation page constitutes a financial product, custody service, settlement service, legal certification, suitability determination, or promise of returns.
