@@ -11,9 +11,10 @@
 - 2026-07-23 — Added a conceptual contract and interface reference plus an accessibility/plain-language review surface without creating an executable API, financial authority, or publication approval.
 - 2026-07-23 — Added an independent financial-authorization review protocol while retaining `DOCUMENTED_NOT_AUTHORIZED` as the governing state.
 - 2026-07-24 — Added a status, finality, and correction lifecycle while retaining `DOCUMENTED_NOT_IMPLEMENTED` and preserving independent financial, technical, canonical-disposition, and legal-finality authority.
+- 2026-07-24 — Added a consumer integration and conformance profile while retaining documentation-only, unregistered, and unaccepted compatibility status.
 
 ### Architecture
-- Intent and policy remain separate from authorization, capability admission, custody, adapter execution, reconciliation, canonical disposition, and settlement; future adapters are disabled and out of the first release.
+- Intent and policy remain separate from authorization, capability admission, custody, adapter execution, consumer interpretation, reconciliation, canonical disposition, and settlement; future adapters are disabled and out of the first release.
 - 2026-07-19 — Added a documented authority model, record lifecycle, environment classification, data classification, adapter boundary, invariants, and repository dependency rules without enabling executable payment behavior.
 - 2026-07-19 — Added proposed record-envelope, authorization, fixed-precision allocation, idempotency, retry, partial-failure, receipt, compatibility, and migration contracts; all remain non-executable design guidance.
 - 2026-07-19 — Recorded ADR-0001 proposing a documentation-only first release and listing the approvals required before simulation work.
@@ -28,6 +29,7 @@
 - 2026-07-23 — Added a closed conceptual map of interface surfaces, record families, envelope semantics, status meanings, candidate reason-code classes, compatibility requirements, and migration constraints while keeping schema ownership unresolved.
 - 2026-07-23 — Added explicit authorization-review states, exact intent and scope bindings, conflict-of-interest and material-change rules, fail-closed stop conditions, correction/revocation propagation, and consumer acknowledgment requirements.
 - 2026-07-24 — Split future record state into processing, authority, and evidence/finality dimensions; documented transition requirements, prohibited transitions, partial and unknown outcomes, adapter-report limits, reconciliation/canonical-disposition separation, legal-finality limits, correction closure, and restored-state requirements.
+- 2026-07-24 — Added immutable consumer declarations, a safe source/envelope/lineage/scope read sequence, explicit authority-effect checks, status-preserving projections, retry/unknown-outcome controls, correction/revocation subscriptions, consumer response rules, conformance fixtures, and restoration requirements.
 
 ### Documentation
 - 2026-07-19 — Added a project guide and architecture reference covering purpose, onboarding, contract families, threat model, release gates, and rollback boundaries.
@@ -39,6 +41,7 @@
 - 2026-07-23 — Added `docs/CONTRACT_REFERENCE.md` and `docs/ACCESSIBILITY_REVIEW.md`; updated the README, Pages home, MkDocs navigation, task chain, release plan, and changelog to expose and govern both surfaces.
 - 2026-07-23 — Added `docs/FINANCIAL_AUTHORIZATION_REVIEW.md`; synchronized README, Pages navigation and overview, task chain, punch list, release plan, and changelog with its role-separation, evidence-lifecycle, onboarding, correction, revocation, and rollback boundaries.
 - 2026-07-24 — Added `docs/STATUS_FINALITY_LIFECYCLE.md`; synchronized README, Pages overview/navigation, task chain, punch list, release plan, and changelog with three-dimensional status semantics, transition constraints, accessible rendering, correction closure, and rollback boundaries.
+- 2026-07-24 — Added `docs/CONSUMER_INTEGRATION_GUIDE.md`; synchronized README, Pages overview/navigation, onboarding, task chain, punch list, release plan, and changelog with consumer declarations, safe integration sequencing, response matrix, conformance fixtures, accessibility, privacy, and restored-state requirements.
 
 ### Accessibility
 - 2026-07-19 — Added visible keyboard focus, reduced-motion behavior, readable responsive tables, semantic navigation, and warning presentation that does not rely on color alone.
@@ -47,6 +50,7 @@
 - 2026-07-23 — Added a dedicated review guide covering heading and landmark structure, descriptive links, text status labels, prose-equivalent diagrams, table linearization, synthetic-example labeling, keyboard focus, 200%/400% zoom, reflow, reduced motion, and plain-language authority comprehension.
 - 2026-07-23 — Required authorization-review state, exact scope, authority source, conflicts, missing evidence, prohibited effects, correction, and revocation to remain understandable without color, hidden interface state, or portfolio-specific knowledge.
 - 2026-07-24 — Required processing, authority, and evidence/finality dimensions; actor/owner or vacancy; uncertainty; correction/revocation/dispute state; observation time; and next action to remain available as visible text with diagram prose and screen-reader-compatible tables.
+- 2026-07-24 — Required consumer source, scope, status dimensions, owner or vacancy, uncertainty, active corrections/revocations/disputes, next action, and non-canonical status to remain available as visible text without color, hover state, or hidden developer information.
 
 ### Security
 - 2026-07-19 — Documented secret prohibitions, payment-metadata minimization, adapter-substitution and receipt risks, claims controls, workflow least privilege, incident triggers, and evidence-preserving recovery.
@@ -57,30 +61,34 @@
 - 2026-07-23 — Required public contract examples to remain synthetic, visibly non-executable, and free of credentials, complete account identifiers, private device identifiers, and production transaction references.
 - 2026-07-23 — Added fail-closed review stops for missing or ambiguous authority, intent, identity, amount, destination, environment, adapter, time, device/workspace, privacy, legal, conflict, and propagation evidence.
 - 2026-07-24 — Added explicit threats and stop conditions for invalid transitions, technical-completion/authorization confusion, adapter-report/finality confusion, partial-success inflation, unknown-outcome replay, silent scope broadening, stale consumer state, and destructive correction.
+- 2026-07-24 — Added fail-closed consumer rules for unsupported profiles, unknown record types, missing bindings, substituted digests, wrong scope, consumer reinterpretation, retry-domain changes, non-acknowledging consumers, and rollback that reactivates invalidated records.
 
 ### Implementation
-- The repository remains documentation-only; no executable payment schema, accounting engine, credential, custody, signing, adapter, testnet behavior, production transfer path, device inspection, device-control behavior, status engine, or finality mechanism was added.
+- The repository remains documentation-only; no executable payment schema, accounting engine, credential, custody, signing, adapter, testnet behavior, production transfer path, device inspection, device-control behavior, consumer runtime, status engine, or finality mechanism was added.
 - 2026-07-19 — Pinned MkDocs 1.6.1 and updated the validation workflow to run `mkdocs build --strict` and retain exact-source evidence.
 - 2026-07-21 — No runtime or schema implementation changed; all new contract, route, device-binding, and fixture material is documentation-only.
 - 2026-07-23 — No runtime or schema implementation changed; the contract reference, accessibility guide, and authorization-review protocol are review artifacts only.
 - 2026-07-24 — No runtime or schema implementation changed; the lifecycle state diagram, status vocabulary, transition rules, and review checklist are documentation-only proposals.
+- 2026-07-24 — No runtime or schema implementation changed; the consumer declaration, integration sequence, response matrix, and fixture plan are documentation-only proposals.
 
 ### Release
-- The documentation candidate remains blocked until charter and portfolio authority decisions, device/workspace identity, contract and status ownership, compatibility witnesses, reproducible publication, claims/accessibility/security review, checksums, provenance, and rollback evidence pass.
+- The documentation candidate remains blocked until charter and portfolio authority decisions, device/workspace identity, contract/status/consumer ownership, compatibility witnesses, reproducible publication, claims/accessibility/security review, checksums, provenance, and rollback evidence pass.
 - 2026-07-19 — Documentation content advanced substantially, but no release gate was marked complete and no production capability was inferred.
 - 2026-07-20 — Exact-source and checksum evidence generation became part of the candidate workflow; accepted exact-head results and all human review gates remain required.
 - 2026-07-21 — Expanded release gates to require independent financial-authority ownership, Repository `1` role approval, machine-readable gluing fixtures, finality and correction semantics, and a cross-repository emergency-stop and recovery exercise.
 - 2026-07-21 — Expanded gates to require device identity, enrollment generation, workspace/source identity, wrong-device rejection, loss/replacement behavior, and independent device, financial, and adapter recovery controls.
 - 2026-07-23 — Added explicit contract-reference, authorization-review, and rendered-accessibility gates; all remain unapproved and require fresh exact-head evidence.
 - 2026-07-24 — Added explicit lifecycle/finality, transition-owner, invalid-transition, partial/unknown outcome, consumer-closure, rollback, and restored-state gates; all remain unapproved.
+- 2026-07-24 — Added explicit consumer-registration, accepted-profile, conformance-fixture, acknowledgment, privacy, accessibility, rollback, and restored-state gates; all remain unapproved.
 
 ### Deployment
-- Pages is the only proposed deployment surface; no credentialed, testnet, production payment, device-monitoring, remote-administration, or status/finality service deployment is authorized.
+- Pages is the only proposed deployment surface; no credentialed, testnet, production payment, device-monitoring, remote-administration, consumer runtime, or status/finality service deployment is authorized.
 - 2026-07-19 — The Pages source builds into `site/`; publication remains separately governed and does not constitute payment-release approval.
 - 2026-07-20 — Pull-request validation retained read-only permissions and produced review artifacts without publishing.
 - 2026-07-21 — The documentation changes do not authorize Pages publication; the updated exact head requires a fresh accepted validation artifact before review.
 - 2026-07-23 — Navigation now exposes contract, authorization-review, and accessibility guides; publication remains separately blocked.
 - 2026-07-24 — Navigation now exposes the status/finality lifecycle guide; publication remains separately blocked and cannot create implementation or legal effect.
+- 2026-07-24 — Navigation now exposes the consumer integration and conformance guide; publication remains separately blocked and cannot create consumer registration, compatibility, financial authority, canonical disposition, or legal effect.
 
 ## Entry format
 - Date

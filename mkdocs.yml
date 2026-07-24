@@ -22,6 +22,7 @@ nav:
   - Obstruction and gluing analysis: OBSTRUCTION_AND_GLUING.md
   - Design contracts: DESIGN_CONTRACTS.md
   - Contract and interface reference: CONTRACT_REFERENCE.md
+  - Consumer integration and conformance: CONSUMER_INTEGRATION_GUIDE.md
   - Independent financial authorization review: FINANCIAL_AUTHORIZATION_REVIEW.md
   - Status, finality, and correction lifecycle: STATUS_FINALITY_LIFECYCLE.md
   - Developer onboarding: ONBOARDING.md
