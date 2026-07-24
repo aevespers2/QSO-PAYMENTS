@@ -1,197 +1,138 @@
 # Documentation Release Punch List
 
-This checklist records evidence for the documentation-only candidate. A checked item requires a durable link to the exact commit, workflow run, report, artifact, checksum, review, or approval. Creating or editing this file does not satisfy a gate.
+This checklist governs the documentation-only candidate. A checked item requires a durable link to the exact commit, workflow run, rendered artifact, checksum, review, or approval. Editing this file, completing a template, or passing a build does not satisfy an authority or release gate.
 
-## P0 — Charter and portfolio authority approval
+## P0 — Charter and ownership
 
-- [ ] Intended users and supported use cases approved
-- [ ] Canonical terminology and status vocabulary approved
-- [ ] Jurisdictional, regulatory, tax, and licensing assumptions approved or explicitly deferred with limits
-- [ ] QSO-PAYMENTS role as A.L.I.S.T.A.I.R.E.'s bounded economic-intent, evidence, dispute, and reconciliation subsystem approved
-- [ ] Repository `0` resource-proposal and portable-host observation role approved
-- [ ] Repository `1` device-enrollment, generic capability, and canonical-state role approved or replaced
-- [ ] Device identity, ownership scope, enrollment generation, replacement, retirement, and revocation owner designated
-- [ ] Workspace, repository, base-commit, and expected-head identity method approved
-- [ ] Independent financial authorizer and revoker designated
-- [ ] Adapter credential, signing, custody, monitoring, and incident owners designated
-- [ ] Device stop, financial stop, adapter stop, portfolio freeze, recovery, and rollback owners designated
-- [ ] Shared schema/package, status/reason-code, and identity-namespace owner approved
-- [ ] Data classification, privacy, retention, disclosure, and deletion model approved
-- [ ] Documentation, simulation, testnet, and production labels and transitions approved
-- [ ] Prohibited capabilities, self-authorization rules, and claims approved
-- [ ] Architecture, security, privacy, accessibility, claims/legal, and release reviewers named
+- [ ] Intended users, supported use cases, terminology, jurisdictions, privacy model, license, environment labels, and prohibited claims approved.
+- [ ] QSO-PAYMENTS role as A.L.I.S.T.A.I.R.E.'s bounded economic-intent, allocation-preview, evidence, dispute, and reconciliation subsystem approved.
+- [ ] Repository `0` proposal/observation role and Repository `1` device, capability, and canonical-disposition role approved or replaced.
+- [ ] Device identity, ownership scope, enrollment generation, workspace/source identity, replacement, retirement, and revocation ownership designated.
+- [ ] Independent financial authorizer and revoker designated with an approved authority-source model.
+- [ ] Generic capability issuer/revoker, adapter credential/custody/signing owner, incident owner, emergency-stop owner, recovery owner, and release owner designated.
+- [ ] Shared schema/package, status/reason-code, identity-namespace, compatibility, and migration owner approved.
+- [ ] Data classification, minimization, retention, disclosure, deletion, legal-hold, and correction model approved.
+- [ ] Architecture, financial, security, privacy, accessibility, claims/legal, and release reviewers named.
 
 Evidence: _pending_
 
-## P1 — Obstruction and gluing approval
+## P1 — Authority separation and gluing
 
-- [ ] Device enrollment is distinct from financial approval
-- [ ] Device trust is distinct from workspace/repository authority
-- [ ] Financial approval is distinct from generic capability issuance
-- [ ] Resource proposal is distinct from validated payment intent
-- [ ] Financial authorization is distinct from an execution credential
-- [ ] Adapter execution is distinct from receipt validation, reconciliation, canonical acceptance, and legal finality
-- [ ] Repository `0` → QSO-PAYMENTS → review → financial authority → Repository `1` route approved
-- [ ] Device/workspace binding policy is approved for every execution-capable environment
-- [ ] Wrong-device, wrong-enrollment-generation, wrong-workspace, wrong-head, wrong-adapter, and wrong-environment use fails closed
-- [ ] Lost, stolen, revoked, retired, and replacement-device lifecycle approved
-- [ ] Intent, authorization, capability, receipt, dispute, reconciliation, correction, revocation, device, workspace, status, reason-code, and recovery schema ownership approved
-- [ ] Requester, beneficiary, payee, destination, device, environment, workspace, and adapter identity namespaces approved
-- [ ] Environment transition state machine approved
-- [ ] Currency, unit, fixed precision, rounding, fee, tax, and remainder semantics approved
-- [ ] Quote source, valuation time, freshness, and exchange-rate rules approved
-- [ ] Shared idempotency, nonce, retry, replay, and duplicate domains approved
-- [ ] Finality, pending, failure, unknown, dispute, reversal, and reconciliation semantics approved
-- [ ] Correction, supersession, cache invalidation, and downstream notification rules approved
-- [ ] Three independent stop domains—device, financial, and adapter—approved
-- [ ] All pairwise contract edges reviewed
-- [ ] All triple-overlap witness groups approved
-- [ ] Active obstructions are resolved, explicitly deferred, or accepted with bounded risk
+- [ ] Resource proposal, validation, independent financial authorization, generic capability, adapter execution, receipt evidence, reconciliation, canonical disposition, custody, and settlement remain distinct.
+- [ ] Device enrollment is distinct from financial approval and workspace/repository authority.
+- [ ] Financial authorization is distinct from a reusable credential or general technical capability.
+- [ ] Adapter execution is distinct from receipt validation, reconciliation, canonical acceptance, and legal finality.
+- [ ] Repository `0` → QSO-PAYMENTS → review → financial authority → Repository `1` route approved.
+- [ ] Wrong requester, beneficiary, authorizer, destination, device, enrollment generation, workspace, repository, expected head, environment, adapter, amount, or time window fails closed.
+- [ ] Lost, stolen, revoked, retired, and replacement-device lifecycle approved.
+- [ ] Currency, unit, fixed precision, rounding, fee, tax, remainder, quote freshness, retry, replay, duplicate, partial-failure, dispute, reversal, correction, and finality semantics approved.
+- [ ] Device, financial, adapter, and portfolio stop domains and recovery order approved.
+- [ ] Pairwise contract edges, triple-overlap witnesses, active obstructions, and residual risks reviewed.
 
 Evidence: _pending_
 
-## P1A — Conceptual contract and interface review
+## P1A — Contract and interface reference
 
-- [ ] Interface surfaces identify producer, consumer, boundary, and current disposition
-- [ ] Common envelope semantics distinguish profile, record, context, provenance, classification, and payload
-- [ ] Proposal, intent, validation, financial authorization, allocation, capability, adapter submission, adapter evidence, reconciliation, and dispute records remain distinct
-- [ ] Status labels have one explicit meaning and one or more prohibited interpretations
-- [ ] Unknown statuses and reason codes fail closed
-- [ ] Examples are visibly synthetic and non-executable
-- [ ] Compatibility and migration requirements preserve source lineage, unsupported fields, consumer closure, and rollback
-- [ ] Contract reference is reviewed without being represented as an approved schema or API
+- [ ] Interface surfaces identify producer, consumer, boundary, and current disposition.
+- [ ] Common envelope separates profile, record, context, provenance, classification, and payload.
+- [ ] Proposal, intent, validation, financial authorization, allocation, capability, adapter submission, adapter evidence, reconciliation, dispute, correction, and revocation records remain distinct.
+- [ ] Status labels have one explicit meaning and prohibited interpretations.
+- [ ] Unknown profiles, statuses, fields, and reason codes fail closed.
+- [ ] Examples are visibly synthetic and non-executable.
+- [ ] Compatibility and migration preserve source lineage, unsupported fields, consumer closure, withdrawal, and rollback.
+- [ ] The contract reference is reviewed without being represented as an approved schema or API.
 
 Evidence: _pending_
 
-## P2 — Machine-readable compatibility evidence
+## P1B — Independent financial-authorization review
 
-- [ ] Canonical schemas are published from the approved owner repository
-- [ ] Every schema has an immutable version and compatibility policy
-- [ ] Canonical serialization and signature scope are defined
-- [ ] Status and reason-code registries are closed, versioned, and independently reviewed
-- [ ] Identical positive fixtures pass in all participating repositories
-- [ ] Malformed, unsupported-version, stale, replayed, wrong-identity, and expected-head mismatch fixtures fail closed
-- [ ] Wrong-device, revoked-device, stale-enrollment, wrong-workspace, and replacement-device fixtures fail closed
-- [ ] Over-limit, wrong-destination, wrong-environment, expired, and revoked authorization fixtures fail closed
-- [ ] Idempotency and duplicate-suppression fixtures prevent repeated effects
-- [ ] Fixed-precision allocation and reconciliation golden vectors pass
-- [ ] Quote freshness and exchange-rate evidence fixtures pass
-- [ ] Partial failure, timeout, retry, reversal, refund, dispute, and compensation fixtures pass
-- [ ] Adapter evidence preserves raw hashes, redaction declarations, uncertainty, device identity, workspace identity, and correction routes
-- [ ] Device, financial, and adapter revocation propagation invalidates downstream use and cached review state
-- [ ] Lost-device and replacement-device fixtures preserve evidence and require fresh admissible bindings
-- [ ] Recovery restores a bounded state without deleting incident evidence
+- [ ] Review status remains `DOCUMENTED_NOT_AUTHORIZED` until a designated independent authority issues an exact decision.
+- [ ] Authorizer identity, role, authority source, jurisdictional limits, and conflict-of-interest state are explicit.
+- [ ] Exact intent identifier and digest are bound to the decision.
+- [ ] Requester, beneficiary, payee, destination, amount, asset/unit, precision, fees, taxes, purpose, environment, adapter, and time limits are explicit.
+- [ ] Required device, enrollment generation, workspace, repository, base commit, and expected-head bindings are explicit.
+- [ ] Observed facts, interpretations, recommendations, disputed evidence, missing evidence, and privacy restrictions are separate.
+- [ ] Decision states include `REVIEW_REQUIRED`, `INDETERMINATE`, `BLOCKED`, `DENIED`, `AUTHORIZED`, `EXPIRED`, `REVOKED`, `SUPERSEDED`, `DISPUTED`, `CORRECTED`, `WITHDRAWN`, and `UNKNOWN`.
+- [ ] Material changes require a new review; prior records are never silently broadened or edited.
+- [ ] Approval explicitly denies credential, custody, signing, capability, adapter, settlement, finality, publication, and release effects not separately granted.
+- [ ] Expiry, correction, revocation, dispute, emergency stop, cache invalidation, consumer notification, acknowledgment, recovery, and residual risk are documented.
+- [ ] Unreachable consumers and incomplete propagation remain blocking findings.
+- [ ] Public review evidence excludes credentials, complete account identifiers, private device identifiers, private communications, and production transaction details.
+- [ ] A reader can understand the exact decision and limitations without color, icons, diagrams, hidden interface state, or portfolio lore.
 
-Evidence: _pending; executable schemas and fixtures require separate approval_
+Evidence: _pending_
 
-## P3 — Source and build integrity
+## P2 — Future machine-readable compatibility evidence
 
-- [ ] Candidate commit is immutable and recorded
-- [ ] Pull-request workflow asserted the submitted head SHA
-- [ ] Clean checkout reproduced
-- [ ] `python -m pip install -r requirements-docs.txt` passed
-- [ ] `mkdocs build --strict` passed
-- [ ] Required files and local links validated
-- [ ] Contract and accessibility guides appear in rendered navigation
-- [ ] Workflow permissions reviewed
-- [ ] Action and dependency versions recorded
-- [ ] Source archive retained
-- [ ] Generated Pages artifact retained
-- [ ] Source-identity record retained
-- [ ] SHA-256 manifest retained
-- [ ] Provenance record retained
-- [ ] Generated output contains no credentials, account data, device identifiers, network inventories, authorization records, or deployment secrets
+Executable schemas and fixtures require separate approval.
+
+- [ ] Canonical owner publishes immutable schemas, semantic profiles, canonical bytes, digest/signature scope, status registry, reason-code registry, and compatibility policy.
+- [ ] Identical positive fixtures pass in every participating repository.
+- [ ] Malformed, unsupported, stale, replayed, duplicate, wrong-identity, wrong-device, wrong-workspace, wrong-head, wrong-environment, wrong-adapter, over-limit, expired, and revoked fixtures fail closed.
+- [ ] Fixed-precision allocation, quote freshness, idempotency, partial failure, timeout, retry, reversal, refund, dispute, correction, and reconciliation vectors pass.
+- [ ] Revocation and correction invalidate cached review state and every dependent capability.
+- [ ] Lost-device and replacement-device fixtures preserve evidence and require fresh admissible bindings.
+- [ ] Recovery restores a bounded state without deleting incident history.
+
+Evidence: _pending; no executable contract is authorized_
+
+## P3 — Exact-source documentation evidence
+
+- [ ] Candidate commit and submitted head are immutable and recorded.
+- [ ] Clean checkout, pinned dependencies, and `mkdocs build --strict` pass.
+- [ ] Required files, navigation, and local links validate.
+- [ ] Contract, authorization-review, and accessibility guides appear in the rendered site.
+- [ ] Pull-request workflow has read-only permissions and no Pages deployment, token-minting, payment, or infrastructure authority.
+- [ ] Action and dependency identities, source archive, rendered site, source-identity record, SHA-256 manifests, and provenance record are retained.
+- [ ] Generated output contains no credentials, account data, private device identifiers, network inventories, authorization records, or deployment secrets.
+- [ ] Current exact-head evidence supersedes earlier runs without erasing historical results.
 
 Evidence: _pending accepted exact-head result after the current documentation changes_
 
-## Content and claims
+## Content, claims, and consistency
 
-- [ ] Purpose and non-goals are consistent across README, Pages, task chain, punch list, release plan, and changelog
-- [ ] A.L.I.S.T.A.I.R.E. objective and QSO-PAYMENTS subsystem role are consistent
-- [ ] Repository `0`, Repository `1`, financial authorization, device trust, workspace identity, and adapter roles are distinct
-- [ ] Intent, validation, authorization, capability, allocation, adapter submission, receipt, reconciliation, dispute, custody, and settlement are distinct
-- [ ] Device enrollment is never described as financial permission
-- [ ] Financial authorization is never described as general device or repository authority
-- [ ] Every capability claim has an environment, device, and workspace binding or explicitly states that no executable capability exists
-- [ ] No custody, signing, settlement-service, investment, certification, suitability, or return promise is implied
-- [ ] No QSO, genome, repository, task, interface, trusted device, successful workflow, or transported record is represented as financial authority
-- [ ] Finality, pending, unknown, reversal, and dispute limitations are visible
-- [ ] Status and reason-code examples do not imply executable contract acceptance
-- [ ] Repository dependency descriptions do not transfer authority
-- [ ] Architecture, contract-reference, accessibility, and gluing documents received human review
+- [ ] Purpose and non-goals are consistent across README, Pages, task chain, punch list, release plan, and changelog.
+- [ ] A.L.I.S.T.A.I.R.E. objective and QSO-PAYMENTS subsystem role are consistent.
+- [ ] Proposal, validation, authorization review, authorization, capability, execution, receipt, reconciliation, dispute, custody, and settlement are never conflated.
+- [ ] A complete review record, trusted device, repository role, interface control, passing workflow, or model recommendation is never described as financial authority.
+- [ ] No custody, signing, settlement-service, investment, suitability, certification, jurisdictional approval, or return promise is implied.
+- [ ] Finality, pending, unknown, partial, reversal, dispute, correction, expiry, revocation, and withdrawal limitations are visible.
+- [ ] Repository dependency descriptions do not transfer authority.
+- [ ] Architecture, contract, authorization-review, accessibility, security/privacy, operations, release, and rollback documents receive human review.
 
 Evidence: _pending_
 
 ## Accessibility and usability
 
-- [ ] Keyboard navigation and visible focus reviewed
-- [ ] Heading structure and landmarks reviewed
-- [ ] Link text and navigation reviewed
-- [ ] Tables and code blocks reflow or scroll without loss
-- [ ] Contrast reviewed
-- [ ] 200% and 400% zoom reviewed
-- [ ] Reduced-motion preference respected
-- [ ] Warnings, authority states, environments, device states, and result states do not rely on color alone
-- [ ] Authority, device, workspace, environment, and finality distinctions are understandable without diagrams alone
-- [ ] Every meaningful diagram has equivalent prose
-- [ ] Every example is labeled illustrative, synthetic, or executable
-- [ ] A reader unfamiliar with the portfolio can identify proposer, validator, authorizer, capability issuer, adapter, reconciler, correction/revocation owner, and unresolved state
+- [ ] Heading structure, landmarks, navigation, link purpose, keyboard path, visible focus, contrast, and reduced motion reviewed.
+- [ ] Tables and code blocks remain usable at 200% and 400% zoom and reflow without loss.
+- [ ] Warnings, authority states, environments, device states, result states, and review states do not rely on color alone.
+- [ ] Every meaningful diagram has equivalent prose.
+- [ ] Every example is labeled documentation-only, illustrative, synthetic, or executable.
+- [ ] A reader unfamiliar with the portfolio can identify proposer, validator, independent authorizer, capability issuer, adapter, reconciler, revoker, incident owner, unresolved evidence, and prohibited effects.
 
 Evidence: _pending_
 
 ## Security, privacy, and financial safety
 
-- [ ] Source and build output scanned for secrets
-- [ ] Source and build output inspected for personal, device, network, or financial data
-- [ ] External links and remote content reviewed
-- [ ] Workflow and supply-chain risks reviewed
-- [ ] Pull-request jobs have no Pages deployment or token-minting authority
-- [ ] Self-approval and cross-repository authority-confusion threats reviewed
-- [ ] Device-trust versus financial-approval confusion reviewed
-- [ ] Workspace/repository authority versus device ownership confusion reviewed
-- [ ] Generic capability versus financial approval confusion reviewed
-- [ ] Wrong-device, stale-enrollment, lost-device, replacement-device, and cached-approval threats reviewed
-- [ ] Adapter substitution, replay, duplicate effect, receipt forgery, and false finality threats reviewed
-- [ ] Credential, signing, custody, key rotation, device binding, and revocation topology independently reviewed
-- [ ] Host evidence and financial evidence remain separately minimized and governed
-- [ ] Data minimization, tokenization, redaction, retention, and publication rules reviewed
-- [ ] Public examples contain no credentials, complete account identifiers, private device identifiers, or production transaction references
-- [ ] Automated budget-escalation and self-funding loops reviewed
-- [ ] Incident contacts, containment authority, independent emergency disable, and recovery order recorded
+- [ ] Source and rendered output scanned for secrets and sensitive personal, device, network, or financial data.
+- [ ] External links, remote content, workflow supply chain, artifact retention, and publication risks reviewed.
+- [ ] Self-approval, financial-authority/capability confusion, trusted-device/financial-permission confusion, cached authorization, replay, duplicate effect, adapter substitution, receipt forgery, and false-finality threats reviewed.
+- [ ] Data minimization, tokenization, redaction, retention, disclosure, deletion, correction, revocation, and legal-hold rules reviewed.
+- [ ] Automated budget escalation, self-funding loops, urgency overrides, and conflict-of-interest bypasses are prohibited.
+- [ ] Incident contacts, containment authority, independent emergency disable, consumer notification, recovery order, and rollback owner are recorded.
 
 Evidence: _pending_
 
-## Deployment and recovery
+## Publication, rollback, and approval
 
-- [ ] Pages publication is separately authorized
-- [ ] Deployment from the exact candidate commit succeeded
-- [ ] Published URL and deployed commit verified
-- [ ] Post-deployment navigation and claims check passed
-- [ ] Prior verified artifact identified
-- [ ] Documentation rollback procedure exercised or credibly demonstrated
-- [ ] Correction or withdrawal updates every controlled documentation route
-- [ ] Device loss/theft, financial revocation, adapter disable, and replacement-device tabletop completed before any executable environment
-- [ ] Financial-route emergency-stop and recovery tabletop completed before any executable environment
-- [ ] Recovery evidence retained
-- [ ] Unresolved findings recorded
-
-Evidence: _pending_
-
-## Approval
-
-- [ ] Documentation reviewer approved
-- [ ] Architecture reviewer approved
-- [ ] Contract/gluing reviewer approved
-- [ ] Contract-reference reviewer approved the conceptual semantics without treating them as an executable API
-- [ ] Portable device-trust reviewer approved
-- [ ] Security and privacy reviewers approved
-- [ ] Accessibility reviewer approved the rendered artifact
-- [ ] Claims/legal reviewer approved where required
-- [ ] Financial authority owner approved the separation-of-duties model
-- [ ] Device-enrollment authority approved device/workspace bindings and replacement behavior
-- [ ] A.L.I.S.T.A.I.R.E. portfolio authority approved subsystem placement
-- [ ] Release owner approved publication
+- [ ] Pages publication separately authorized.
+- [ ] Published URL, deployed commit, claims, links, navigation, accessibility, security/privacy, and rollback route verified.
+- [ ] Prior verified artifact identified and restoration credibly demonstrated.
+- [ ] Correction or withdrawal updates every controlled documentation route.
+- [ ] Device loss, financial revocation, adapter disable, consumer invalidation, and replacement-device tabletop completed before any executable environment.
+- [ ] Documentation, architecture, contract, financial, security, privacy, accessibility, claims/legal, device-trust, portfolio, and release reviewers approve their bounded responsibilities.
 
 Decision: `BLOCKED`
 
-Reason: Charter, financial-authority, device/workspace identity, schema/status/reason-code ownership, compatibility witnesses, exact-head review evidence, rendered accessibility review, publication approval, and recovery ownership remain pending. No simulation, testnet, adapter, device-control, or production payment work is authorized.
+Reason: Charter, independent financial authority, authority-source policy, device/workspace identity, Repository `1` role, schema/status/reason-code ownership, compatibility witnesses, exact-head review evidence, rendered accessibility review, legal/privacy/security review, publication approval, correction/revocation propagation, and recovery ownership remain pending. No simulation, testnet, adapter, device-control, or production payment work is authorized.
